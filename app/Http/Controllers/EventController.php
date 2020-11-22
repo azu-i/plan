@@ -10,14 +10,13 @@ class EventController extends Controller
 {
     public function setEvents(Request $request){
         $this->carbon = new Carbon;
-
         // $start = $this->formatDate($request->all()['start']);
         // $end = $this->formatDate($request->all()['end']);
         $startDay = $this->carbon->copy()->startOfWeek();
 		$lastDay = $this->carbon->copy()->endOfWeek();
         //表示した月のカレンダーの始まりの日を終わりの日をそれぞれ取得。
 
-        $events = Event::select('id', 'title', 'date')->whereBetween('date', [$startDay, $lastDay])->get();
+        $events = $this->Event::select('id', 'event_name', 'date')->whereBetween('date', [$startDay, $lastDay])->get();
         //カレンダーの期間内のイベントを取得
 
         $newArr = [];
