@@ -26,6 +26,7 @@
             <script src='/js/fullcalendar/interaction/main.js'></script>
 
             <link href='/css/fullcalendar/core/main.css' type="text/css" rel='stylesheet' />
+            
             <link href='/calendar/daygrid/main.css' type="text/css" rel='stylesheet' />
 
             <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
