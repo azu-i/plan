@@ -7,7 +7,7 @@
             <meta name="csrf-token" content="{{ csrf_token() }}">
             <title>@yield('title')</title>
 
-            <script src="{{secure_asset('js/app.js') }}"></script>
+            <script src="{{asset('js/app.js') }}" defer></script>
             @yield('js')
 
              <!-- Fonts -->
@@ -15,28 +15,20 @@
              <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
              <!-- Styles -->
-             <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
-             <link href="{{ secure_asset('css/layout.css') }}" rel="stylesheet">
+             <link href="{{ asset('css/app.css') }}" rel="stylesheet">
              <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
             <!-- Ajax -->
              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
              <!-- fullcalendar -->
-             <script src='/js/fullcalendar/core/main.js'></script>
-            <script src='/js/fullcalendar/daygrid/main.js'></script>
-            <script src='/js/fullcalendar/interaction/main.js'></script>
+             <!--js-->
+             <script src="{{ asset('js/fullcalendar/main.js') }}"></script>
+            <!--css-->
+            <link href="{{ asset('css/fullcalendar/main.css') }}" type="text/css" rel='stylesheet' />
 
-            <link href='/css/fullcalendar/core/main.css' type="text/css" rel='stylesheet' />
-            
-            <link href='/calendar/daygrid/main.css' type="text/css" rel='stylesheet' />
 
-            <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
-            <script src='lib/jquery.min.js'></script>
-            <script src='lib/moment.min.js'></script>
-            <script src='fullcalendar/fullcalendar.js'></script>
-
-            <script src="/js/ajax-setup.js"></script>
-            <script src='/js/fullcalendar.js'></script>
-            <script src='/js/event-control.js'></script>
+            <script src="{{ asset('js/fullcalendar.js') }}" defer></script>
+            <script src="{{ asset('js/event-control.js') }}" defer></script>
+            <script src="{{ asset('js/ajax-setup.js') }}" defer></script>
         </head>
         <body>
 
@@ -44,13 +36,13 @@
                   <nav class="navbar fixed-top navbar-dark bg-dark navbar-laravel">
                     <div class="container-fluid">
                         <div class="navbar-header">
-                            <a class="navbar-brand">Plan Adelane</a>
+                            <a class="navbar-brand">アプリ名</a>
                         </div>
                     </div>
 
 
                   </nav>
-                <main>
+                <main class="mt-10">
                     @yield('content')
                 </main>
             </div>
