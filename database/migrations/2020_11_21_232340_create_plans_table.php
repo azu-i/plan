@@ -17,9 +17,9 @@ class CreatePlansTable extends Migration
             $table->bigIncrements('id');
             $table->string('event_name');
             $table->date('date');
-            $table->time('time')->nullable();
+            $table->time('time');
             $table->string('detail')->nullable();
-            $table->string('image_path');
+            $table->string('image_path')->nullable();
             $table->timestamps();
         });
     }

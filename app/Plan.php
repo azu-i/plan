@@ -10,8 +10,8 @@ class Plan extends Model
     //
     public static $rules = array(
         'event_name' => 'required|max:20',
-        'day' => 'required',
+        'date' => 'required',
         'detail' => "max:30",
-        'image_path' => "required",
+        'time' => "required",
     );
 }

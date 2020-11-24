@@ -1,5 +1,4 @@
 function addEvent(calendar,info){
-    //addEvent()を使うためにfullcalendar.jsで定義したcalendarを引数で受け取る
 
     var title = "サンプルイベント";
     //ホントはjsでformのvalue取得とかするんだと思いますが、説明を簡潔にするために割愛します。

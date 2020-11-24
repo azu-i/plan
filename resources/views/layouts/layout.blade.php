@@ -24,25 +24,33 @@
              <script src="{{ asset('js/fullcalendar/main.js') }}"></script>
             <!--css-->
             <link href="{{ asset('css/fullcalendar/main.css') }}" type="text/css" rel='stylesheet' />
+            <link href="{{ asset('css/calendar.css') }}" rel='stylesheet' />
 
 
             <script src="{{ asset('js/fullcalendar.js') }}" defer></script>
             <script src="{{ asset('js/event-control.js') }}" defer></script>
             <script src="{{ asset('js/ajax-setup.js') }}" defer></script>
         </head>
-        <body>
+        <body class="p">
 
             <div id="app">
-                  <nav class="navbar fixed-top navbar-dark bg-dark navbar-laravel">
-                    <div class="container-fluid">
+                  <nav class="navbar fixed-top navbar-dark bg-dark navbar-expand-lg">
                         <div class="navbar-header">
                             <a class="navbar-brand">アプリ名</a>
                         </div>
-                    </div>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navmenu1" aria-controls="navmenu1" aria-expanded="false"aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navmenu1">
+                            <div class="navbar-nav">
+                                <a class="nav-item nav-link" href="{{ url('/plan') }}">予定登録</a>
 
 
+                            </div>
+
+                        </div>
                   </nav>
-                <main class="mt-10">
+                <main style="padding-top:70px">
                     @yield('content')
                 </main>
             </div>

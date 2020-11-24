@@ -3,22 +3,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
         defaultView: 'dayGridMonth',
-        //カレンダーを月ごとに表示
-        editable: true,
+        height: 700 ,
         //イベント編集
-        firstDay : 1,
-        //秋の始まりを設定。1→月曜日。defaultは0(日曜日)
-        eventDurationEditable : false,
+        editable: true,
+        //1→月曜日始まり、0→日曜日始まり
+        firstDay : 0,
         //イベントの期間変更
-        selectLongPressDelay:0,
+        eventDurationEditable : false,
         // スマホでタップしたとき即反応
-        events: [
-            {
-                title: 'イベント',
-                start: '2019-01-01'
-            }
-        ],
-        //一旦イベントのサンプルを表示。動作確認用。
+        selectLongPressDelay:0,
+
+        events: "/setEvents",
 
         eventDrop: function(info){
             //eventをドラッグしたときの処理

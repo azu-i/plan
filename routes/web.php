@@ -17,10 +17,19 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/setEvents', 'EventController@setEvents');
+Route::get('/', 'HomeController@index')->name('home')->middleware('auth');
+
+
+Route::get('/setEvents', 'EventController@setEvents')->middleware('auth');
 
 Route::post('/ajax/addEvent', 'EventController@addEvent');
 Route::post('/ajax/editEventDate', 'EventController@editEventDate');
 
+//Planについて
+Route::get('/plan','PlanController@getPlan')->middleware('auth');
+Route::post('/plan','PlanController@postPlan')->middleware('auth');
+Route::get('/plan','PlanController@planHistory')->middleware('auth');
+Route::get('/plan/delete', 'PlanController@delete')->middleware('auth');
+
+Route::get('calendar' , 'EventController@calendar')->middleware('auth');

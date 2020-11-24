@@ -11,18 +11,16 @@ class EventController extends Controller
 
     public function setEvents(Request $request){
         $this->carbon = new Carbon;
-        // $start = $this->formatDate($request->all()['start']);
-        // $end = $this->formatDate($request->all()['end']);
+
         $start = $this->carbon->copy()->startOfWeek();
 		$end = $this->carbon->copy()->endOfWeek();
-        //表示した月のカレンダーの始まりの日を終わりの日をそれぞれ取得。
 
-        $events = Plan::select('id', 'event_name', 'date')->whereBetween('date', [$start, $end])->get();
+        $events = Plan::select('id', 'event_name', 'date','time')->whereBetween('date', [$start, $end])->get();
         //カレンダーの期間内のイベントを取得
 
         $newArr = [];
         foreach($events as $item){
-            $newItem["event _name"] = $item["event_name"];
+            $newItem["title"] = $item["event_name"];
             $newItem["time"] = $item["time"];
             $newItem["start"] = $item["date"];
             $newArr[] = $newItem;
@@ -30,8 +28,6 @@ class EventController extends Controller
         //新たな配列を用意し、 EventsObjectが対応している配列にキーの名前を変更する
 
         echo json_encode($newArr);
-        // json形式にして出力
-        return view('calendar');
     }
 
     public function formatDate($date){
@@ -58,5 +54,9 @@ class EventController extends Controller
         $event->date = $data['newDate'];
         $event->save();
         return null;
+    }
+
+    public function calendar(){
+        return view('calendar');
     }
 }
