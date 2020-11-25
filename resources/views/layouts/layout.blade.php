@@ -36,7 +36,7 @@
             <div id="app">
                   <nav class="navbar fixed-top navbar-dark bg-dark navbar-expand-lg">
                         <div class="navbar-header">
-                            <a class="navbar-brand">アプリ名</a>
+                            <a class="navbar-brand" href="{{ url('/calendar') }}">アプリ名</a>
                         </div>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navmenu1" aria-controls="navmenu1" aria-expanded="false"aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
