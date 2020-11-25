@@ -22,7 +22,7 @@ class EventController extends Controller
         foreach($events as $item){
             $newItem["title"] = $item["event_name"];
             $newItem["time"] = $item["time"];
-            $newItem["start"] = $item["date"];
+            $newItem["start"] = $item["date"] ;
             $newArr[] = $newItem;
         }
         //新たな配列を用意し、 EventsObjectが対応している配列にキーの名前を変更する

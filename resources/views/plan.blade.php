@@ -53,7 +53,7 @@
            </form>
         </div>
     </div>
-    <div class="row">
+    <div class="row pt-4">
         <div class="list-plans col-md-12 mx-auto">
             <div class="row">
                 <table class="table">
@@ -62,6 +62,7 @@
                             <th>予定名</th>
                             <th>日程</th>
                             <th>時間</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
