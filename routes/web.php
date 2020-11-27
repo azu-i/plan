@@ -32,4 +32,4 @@ Route::post('/plan','PlanController@postPlan')->middleware('auth');
 Route::get('/plan','PlanController@planHistory')->middleware('auth');
 Route::get('/plan/delete', 'PlanController@delete')->middleware('auth');
 
-Route::get('calendar' , 'EventController@calendar')->middleware('auth');
+Route::get('/calendar' , 'EventController@calendar')->middleware('auth');
