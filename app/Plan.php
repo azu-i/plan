@@ -14,4 +14,9 @@ class Plan extends Model
         'detail' => "max:30",
         'time' => "required",
     );
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
+
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use App\Plan;
 
 class PlanController extends Controller
@@ -24,6 +23,7 @@ class PlanController extends Controller
 
         $plan -> date = $request->date;
         $plan -> event_name = $request -> event_name;
+        // $plan -> user_id = $request->user()->id;
 
         unset($form['_token']);
         $plan -> fill($form);

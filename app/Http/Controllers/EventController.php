@@ -5,17 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Plan;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
 
     public function setEvents(Request $request){
         $this->carbon = new Carbon;
+        $user_id = Auth::id();
 
         $start = $this->carbon->copy()->startOfWeek();
-		$end = $this->carbon->copy()->endOfWeek();
+        $end = $this->carbon->copy()->endOfWeek();
 
-        $events = Plan::select('id', 'event_name', 'date','time')->whereBetween('date', [$start, $end])->get();
+        $events = Plan::find($user_id)->select('id', 'event_name', 'date','time')->whereBetween('date', [$start, $end])->get();
         //カレンダーの期間内のイベントを取得
 
         $newArr = [];
