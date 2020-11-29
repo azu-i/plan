@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Plan;
 use Carbon\Carbon;
+use App\Follower;
+
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
@@ -13,7 +15,6 @@ class EventController extends Controller
     public function setEvents(Request $request){
         $this->carbon = new Carbon;
         $user_id = Auth::id();
-
 
         $start = $this->carbon->copy()->startOfWeek();
         $end = $this->carbon->copy()->endOfWeek();

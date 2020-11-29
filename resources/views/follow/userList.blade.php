@@ -10,13 +10,13 @@
                             <div class="ml-2 d-flex flex-column">
                                 <p class="mb-0">{{ $user->name }}</p>
                             </div>
-                            @if(auth()->user()->isFollowed($user->id))
+                            @if(auth()->user()->isFollowing($user))
                             <div class="px-2">
-                                <span class="px-1 bg-secondary text-light">フォロー済み</span>
+                                <span class="px-1 bg-secondary text-light">フォロー中</span>
                             </div>
                             @endif
                             <div class="d-flex justify-content-end flex-grow-1">
-                                @if(auth()->user()->isFollowed($user->id))
+                                @if(auth()->user()->isFollowing($user))
                                     <a  class="btn btn-danger" href="{{ action('UsersController@unfollow', ['id' => $user->id]) }}">フォロー解除</a>
 
                                         {{ csrf_field() }}

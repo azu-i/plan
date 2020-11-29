@@ -39,7 +39,6 @@
                             <label class="checkbox-inline">
                                 <input type="checkbox" name="checkbox[]" value="5"><img src="image/calendar.png" alt="その他予定アイコン">その他予定
                             </label>
-
                         </div>
                 </div>
                 <div class="form-group row">
@@ -90,7 +89,7 @@
                                 <td>
                                     <div>
                                         <a  class="btn btn-secondary" href="{{ action('PlanController@delete', ['id' => $plan->id]) }}">削除</a>
-                                        
+
                                         {{ csrf_field() }}
                                     </div>
                                 </td>

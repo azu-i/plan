@@ -20,7 +20,7 @@ class PlanController extends Controller
         $this->validate($request, Plan::$rules);
 
         $plan = new Plan();
-        // $form = $request->all();
+        $form = $request->all();
 
         $plan -> date = $request -> date;
         $plan -> event_name = $request -> event_name;

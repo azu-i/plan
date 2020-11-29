@@ -21,25 +21,23 @@ class UsersController extends Controller
     }
 
     //フォロー
-    public function follow(){
-        $user = new User;
-        $follower = auth()->user();
-        $is_following = $follower->isFollowing($user->id);
-        if(!$is_following){
-            $follower->follow($user->id);
+    public function follow(Request $request){
+        // dd($request->user_id);
+        $followed_user = User::find($request->user_id);
+        $auth_user = auth()->user();
+        if(!$auth_user->isFollowing($followed_user)){
+            $auth_user->follow($followed_user->id);
             return back();
         }
-
     }
 
     //フォロー解除
-    public function unfollow(User $user){
-        $follower = auth()->user();
-        $is_following = $follower->isFollowing($user->id);
-        if($is_following) {
-            $follower->unfollow($user->id);
-            return redirect('/plan');
+    public function unfollow(Request $request){
+        $followed_user = User::find($request->user_id);
+        $auth_user = auth()->user();
+        if($auth_user->isFollowing($followed_user)){
+            $auth_user->unfollow($followed_user->id);
+            return back();
         }
-
     }
 }

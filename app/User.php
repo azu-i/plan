@@ -66,15 +66,13 @@ class User extends Authenticatable
         return $this->follows()->detach($user_id);
     }
 
-    public function isFollowing($user_id)
+    public function isFollowing($user)
     {
-        return $this->follows()->where('following_id', $user_id)->exists();
+        return $this->follows()->where('followed_id', $user->id)->exists();
     }
 
-    public function isFollowed($user_id)
+    public function isFollowed($user)
     {
-        return $this->followers()->where('followed_id', $user_id)->exists();
+        return $this->followers()->where('following_id', $user->id)->exists();
     }
-
-
 }

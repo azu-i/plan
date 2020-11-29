@@ -36,8 +36,8 @@ Route::get('/calendar' , 'EventController@calendar')->middleware('auth');
 
 //follow関連
 Route::get('/users', 'UsersController@userlist')->middleware('auth');
-Route::get('users/{user}/follow', 'UsersController@follow')->name('follow');
-Route::delete('users/{user}/unfollow', 'UsersController@unfollow')->name('unfollow');
+Route::get('users/{user_id}/follow', 'UsersController@follow')->name('follow');
+Route::get('users/{user_id}/unfollow', 'UsersController@unfollow')->name('unfollow');
 
 
 
