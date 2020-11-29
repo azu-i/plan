@@ -33,3 +33,11 @@ Route::get('/plan','PlanController@planHistory')->middleware('auth');
 Route::get('/plan/delete', 'PlanController@delete')->middleware('auth');
 
 Route::get('/calendar' , 'EventController@calendar')->middleware('auth');
+
+//follow関連
+Route::get('/users', 'UsersController@userlist')->middleware('auth');
+Route::get('users/{user}/follow', 'UsersController@follow')->name('follow');
+Route::delete('users/{user}/unfollow', 'UsersController@unfollow')->name('unfollow');
+
+
+

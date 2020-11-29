@@ -14,10 +14,11 @@ class EventController extends Controller
         $this->carbon = new Carbon;
         $user_id = Auth::id();
 
+
         $start = $this->carbon->copy()->startOfWeek();
         $end = $this->carbon->copy()->endOfWeek();
 
-        $events = Plan::find($user_id)->select('id', 'event_name', 'date','time')->whereBetween('date', [$start, $end])->get();
+        $events = Plan::where('user_id', $user_id)->whereBetween('date', [$start, $end])->select('id', 'event_name', 'date','time')->get();
         //カレンダーの期間内のイベントを取得
 
         $newArr = [];

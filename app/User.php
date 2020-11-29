@@ -37,7 +37,44 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function articles(){
+    public function plans(){
     return $this->hasMany('App\Plan');
     }
+
+    public function followers()
+    {
+        return $this->belongsToMany(self::class, 'followers', 'followed_id', 'following_id');
+    }
+
+    public function follows()
+    {
+        return $this->belongsToMany(self::class, 'followers', 'following_id', 'followed_id');
+    }
+
+    public function getAllUsers(Int $user_id)
+    {
+        return $this->where('id', '<>', $user_id)->paginate(10);
+    }
+
+    public function follow($user_id)
+    {
+        return $this->follows()->attach($user_id);
+    }
+
+    public function unfollow($user_id)
+    {
+        return $this->follows()->detach($user_id);
+    }
+
+    public function isFollowing($user_id)
+    {
+        return $this->follows()->where('following_id', $user_id)->exists();
+    }
+
+    public function isFollowed($user_id)
+    {
+        return $this->followers()->where('followed_id', $user_id)->exists();
+    }
+
+
 }

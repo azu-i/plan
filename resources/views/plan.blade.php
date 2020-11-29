@@ -90,6 +90,7 @@
                                 <td>
                                     <div>
                                         <a  class="btn btn-secondary" href="{{ action('PlanController@delete', ['id' => $plan->id]) }}">削除</a>
+                                        
                                         {{ csrf_field() }}
                                     </div>
                                 </td>

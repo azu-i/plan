@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Plan;
+use Illuminate\Support\Facades\Auth;
 
 class PlanController extends Controller
 {
@@ -19,14 +20,14 @@ class PlanController extends Controller
         $this->validate($request, Plan::$rules);
 
         $plan = new Plan();
-        $form = $request->all();
+        // $form = $request->all();
 
-        $plan -> date = $request->date;
+        $plan -> date = $request -> date;
         $plan -> event_name = $request -> event_name;
-        // $plan -> user_id = $request->user()->id;
+        $plan->user_id = $request->user()->id;
 
         unset($form['_token']);
-        $plan -> fill($form);
+        // $plan -> fill($form);
         $plan -> save();
 
 
@@ -34,15 +35,11 @@ class PlanController extends Controller
     }
 
     //Plan履歴
-    public function planHistory(Request $request){
-        $search = $request -> search;
-        if($search != ''){
-            $posts = Plan::where('event_name',$search) -> get();
-        }else{
-            $posts = Plan::all();
+    public function planHistory(){
+            $user_id = Auth::id();
+            $posts = Plan::where('user_id', $user_id)->get();
 
-        }
-        return view('plan',['posts'=>$posts, 'search'=>$search]);
+            return view('plan',['posts'=>$posts]);
     }
 
     //Plan削除

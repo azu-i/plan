@@ -1,0 +1,38 @@
+@extends('layouts.layout')
+@section('title','ユーザー一覧')
+@section('content')
+    <div class="conteiner">
+        <div class="row justify-content-center">
+            <div class="col-md-7">
+                @foreach($all_users as $user)
+                    <div class="card">
+                        <div class="card-haeder p-3 w-100 d-flex">
+                            <div class="ml-2 d-flex flex-column">
+                                <p class="mb-0">{{ $user->name }}</p>
+                            </div>
+                            @if(auth()->user()->isFollowed($user->id))
+                            <div class="px-2">
+                                <span class="px-1 bg-secondary text-light">フォロー済み</span>
+                            </div>
+                            @endif
+                            <div class="d-flex justify-content-end flex-grow-1">
+                                @if(auth()->user()->isFollowed($user->id))
+                                    <a  class="btn btn-danger" href="{{ action('UsersController@unfollow', ['id' => $user->id]) }}">フォロー解除</a>
+
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                @else
+                                    <a  class="btn btn-secondary" href="{{ action('UsersController@follow', ['id' => $user->id]) }}">フォローする</a>
+                                    {{ csrf_field() }}
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        <div class="my-4 d-flex justify-content-center">
+            {{ $all_users->links() }}
+        </div>
+    </div>
+@endsection
