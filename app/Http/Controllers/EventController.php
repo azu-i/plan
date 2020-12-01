@@ -6,22 +6,30 @@ use Illuminate\Http\Request;
 use App\Plan;
 use Carbon\Carbon;
 use App\Follower;
+use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
 
-    public function setEvents(Request $request){
+    public function setEvents(Request $request, Follower $follower){
         $this->carbon = new Carbon;
-        $user_id = Auth::id();
+        $user = Auth::user();
+        // followed_idだけ抜き出す
+        $follow_ids = $follower->followingIds($user->id);
+        //ログイン中のfollowed_idに紐づくfollowing_idをarrayで取り出す
+        $following_ids = $follow_ids->pluck('followed_id')->toArray();
 
+        // 期間の始まりと終わり
         $start = $this->carbon->copy()->startOfWeek();
         $end = $this->carbon->copy()->endOfWeek();
 
-        $events = Plan::where('user_id', $user_id)->whereBetween('date', [$start, $end])->select('id', 'event_name', 'date','time')->get();
         //カレンダーの期間内のイベントを取得
+        $events = Plan::whereIn('user_id', [$follow_ids, $following_ids])->whereBetween('date', [$start, $end])->select('id', 'event_name', 'date','time')->get();
+        // $events = Plan::where('user_id', $user_id)->whereBetween('date', [$start, $end])->select('id', 'event_name', 'date','time')->get();
 
+        //新たな配列を用意し、 EventsObjectが対応している配列にキーの名前を変更する
         $newArr = [];
         foreach($events as $item){
             $newItem["title"] = $item["event_name"];
@@ -29,7 +37,6 @@ class EventController extends Controller
             $newItem["start"] = $item["date"] ;
             $newArr[] = $newItem;
         }
-        //新たな配列を用意し、 EventsObjectが対応している配列にキーの名前を変更する
 
         echo json_encode($newArr);
     }
@@ -50,8 +57,8 @@ class EventController extends Controller
 
         return response()->json(['id' => $event->id ]);
     }
-    // ajaxで受け取ったデータをデータベースに追加し、今度はidを返す。
 
+    // ajaxで受け取ったデータをデータベースに追加し、今度はidを返す。
     public function editEventDate(Request $request){
         $data = $request->all();
         $event = Plan::find($data['id']);
@@ -59,6 +66,7 @@ class EventController extends Controller
         $event->save();
         return null;
     }
+
 
     public function calendar(){
         return view('calendar');

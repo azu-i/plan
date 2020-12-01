@@ -45,12 +45,11 @@
                             <div class="navbar-nav">
                                 <a class="nav-item nav-link" href="{{ url('/plan') }}">予定登録</a>
                             </div>
-                        </div>
-                        <div class="collapse navbar-collapse" id="navmenu2">
                             <div class="navbar-nav">
-                                <a class="nav-item nav-link" href="{{ url('/users') }}">ユーザー一覧</a>
+                                <a class="nav-item nav-link" href="{{ url('/users') }}">フォロー画面</a>
                             </div>
                         </div>
+
                   </nav>
                 <main style="padding-top:70px">
                     @yield('content')
