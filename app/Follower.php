@@ -24,10 +24,4 @@ class Follower extends Model
         return $this->where('following_id', $user_id)->get('followed_id');
     }
 
-    public function eventGet(Int $user_id, Array $follow_ids)
-    {
-        // 自身とフォローしているユーザIDを結合する
-        $follow_ids[] = $user_id;
-        return $this->whereIn('user_id', $follow_ids)->orderBy('created_at', 'DESC')->paginate(50);
-    }
 }

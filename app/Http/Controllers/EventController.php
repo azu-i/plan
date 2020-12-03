@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Auth;
 class EventController extends Controller
 {
 
-    public function setEvents(Request $request, Follower $follower){
+    public function setEvents(Follower $follower){
         $this->carbon = new Carbon;
         $user = Auth::user();
+        $user_id = $user->id;
         // followed_idだけ抜き出す
         $follow_ids = $follower->followingIds($user->id);
         //ログイン中のfollowed_idに紐づくfollowing_idをarrayで取り出す
@@ -26,8 +27,11 @@ class EventController extends Controller
         $end = $this->carbon->copy()->endOfWeek();
 
         //カレンダーの期間内のイベントを取得
-        $events = Plan::whereIn('user_id', [$follow_ids, $following_ids])->whereBetween('date', [$start, $end])->select('id', 'event_name', 'date','time')->get();
-        // $events = Plan::where('user_id', $user_id)->whereBetween('date', [$start, $end])->select('id', 'event_name', 'date','time')->get();
+        if($following_ids != null){
+            $events = Plan::whereIn('user_id', [$user_id, $following_ids])->whereBetween('date', [$start, $end])->select('id', 'event_name', 'date','time')->get();
+        }else{
+            $events = Plan::where('user_id', $user_id)->whereBetween('date', [$start, $end])->select('id', 'event_name', 'date','time')->get();
+        }
 
         //新たな配列を用意し、 EventsObjectが対応している配列にキーの名前を変更する
         $newArr = [];

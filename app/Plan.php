@@ -19,4 +19,11 @@ class Plan extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function eventGet($user_id, $follow_ids)
+    {
+        // 自身とフォローしているユーザIDを結合する
+        $follow_ids[] = $user_id;
+        return $this->whereIn('user_id', $follow_ids)->orderBy('created_at', 'DESC')->paginate(50);
+    }
+
 }
