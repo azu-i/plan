@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
         defaultView: 'dayGridMonth',
         height: 700 ,
         editable: true,
+        displayEventTime: true,
+        // displayEventEnd:true,
+        timeFormat:"HH:mm",
         //1→月曜日始まり、0→日曜日始まり
         firstDay : 0,
         headerToolbar: {
@@ -12,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
             center: "title",
             right: "today prev,next"
           },
-          
+
 
         //イベントの期間変更
         eventDurationEditable : false,

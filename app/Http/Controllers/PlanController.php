@@ -18,7 +18,6 @@ class PlanController extends Controller
     public function postPlan(Request $request)
     {
         $this->validate($request, Plan::$rules);
-
         $plan = new Plan();
         $form = $request->all();
 
@@ -27,9 +26,8 @@ class PlanController extends Controller
         $plan->user_id = $request->user()->id;
 
         unset($form['_token']);
-        // $plan -> fill($form);
+        $plan -> fill($form);
         $plan -> save();
-
 
         return redirect("/plan");
     }
@@ -38,7 +36,6 @@ class PlanController extends Controller
     public function planHistory(){
             $user_id = Auth::id();
             $posts = Plan::where('user_id', $user_id)->get();
-
             return view('plan',['posts'=>$posts]);
     }
 

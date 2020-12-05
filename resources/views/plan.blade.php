@@ -16,13 +16,12 @@
                 @endif
                 <div class="form-group row">
                     <label class="col-md-7">予定名  ※</label>
-
                     <div  class="col-md-10">
-                        <input type="text" class="form-control" name="event_name" value="{{ old('even_name') }}">
+                        <input type="text" class="form-control" name="event_name" value="{{ old('event_name') }}">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-7">予定アイコン</label>
+                    <label class="col-md-7" name="image_path">予定アイコン</label>
                         <div class="checkbox">
                             <label class="checkbox-inline">
                                 <input src="" type="checkbox" name="checkbox[]" value="1"><img src="image/cake.jpeg" alt="誕生日アイコン">誕生日
