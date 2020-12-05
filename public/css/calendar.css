@@ -1,7 +1,11 @@
 
-fc-sun {
+.fc-sun {
     background-color:#fae6e3;
 }
-fc-sat {
+.fc-sat {
     background-color:#dceef7;
+}
+
+.holiday{
+    color:red;
 }

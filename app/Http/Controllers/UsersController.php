@@ -20,9 +20,8 @@ class UsersController extends Controller
         return view('follow.userList',['all_users' => $all_users]);
     }
 
-    //フォロー
+    //フォロー機能
     public function follow(Request $request){
-        // dd($request->user_id);
         $followed_user = User::find($request->user_id);
         $auth_user = auth()->user();
         if(!$auth_user->isFollowing($followed_user)){

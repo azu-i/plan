@@ -2,6 +2,18 @@ document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
+        eventSources: [
+            {
+            googleCalendarApiKey: 'AIzaSyC_qr8J9tGVhIze_ZeGiHFebfwjRRGc9Q8',
+            googleCalendarId: 'ja.japanese#holiday@group.v.calendar.google.com',
+            className: 'holiday',
+            color:'white',
+            textColor: 'red',
+          },
+        //   {
+        //     googleCalendarId: 'hoge-na-calendar@group.calendar.google.com',
+        //   }
+        ],
         defaultView: 'dayGridMonth',
         height: 700 ,
         editable: true,
@@ -15,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
             center: "title",
             right: "today prev,next"
           },
-
 
         //イベントの期間変更
         eventDurationEditable : false,
