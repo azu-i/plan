@@ -49,7 +49,7 @@
                                 <a class="nav-item nav-link" href="{{ url('/users') }}">フォロー画面</a>
                             </div>
                             <div class="navbar-nav">
-                                <a class="nav-item nav-link" href="{{ url('/users/edit') }}">ユーザー情報編集</a>
+                                <a class="nav-item nav-link" href="{{ url('users/'.$login_user->id.'/detail') }}">ユーザー情報</a>
                             </div>
                         </div>
 

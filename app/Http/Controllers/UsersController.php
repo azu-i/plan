@@ -21,7 +21,8 @@ class UsersController extends Controller
     }
 
     //フォロー機能
-    public function follow(Request $request){
+    public function follow(Request $request)
+    {
         $followed_user = User::find($request->user_id);
         $auth_user = auth()->user();
         if(!$auth_user->isFollowing($followed_user)){
@@ -31,7 +32,8 @@ class UsersController extends Controller
     }
 
     //フォロー解除
-    public function unfollow(Request $request){
+    public function unfollow(Request $request)
+    {
         $followed_user = User::find($request->user_id);
         $auth_user = auth()->user();
         if($auth_user->isFollowing($followed_user)){
@@ -40,27 +42,31 @@ class UsersController extends Controller
         }
     }
 
-    public function edit(User $user){
-        return view('users.edit', ['user' => $user]);
+    public function edit()
+    {
+        $login_user = Auth::user();
+        return view('users.edit', ['login_user' => $login_user]);
     }
 
-    public function update(Request $request, User $user){
-        $data = $request -> all();
+    public function update(Request $request, User $user)
+    {
+        $data = $request->all();
         $validator = Validator::make($data, [
-            'birthday'      => ['date'],
+            'name'          => ['required', 'string', 'max:255'],
             'profile_image' => ['file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'email'         => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)]
         ]);
         $validator->validate();
         $user->updateProfile($data);
 
-        return redirect('/users'.$user->id);
+        return redirect('users/'.$user->id);
     }
 
-    public function show(User $user){
+        public function show()
+    {
         $login_user = Auth::user();
         return view('users.show',[
             'login_user' => $login_user,
-            'user'       =>$user,
         ]);
     }
 }

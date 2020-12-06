@@ -40,8 +40,11 @@ Route::get('users/{user_id}/follow', 'UsersController@follow')->name('follow');
 Route::get('users/{user_id}/unfollow', 'UsersController@unfollow')->name('unfollow');
 
 // user編集
-Route::get('users/edit', 'UsersController@edit')->middleware('auth');
-Route::get('users/update', 'UsersController@update');
+Route::get('users/{user_id}/edit', 'UsersController@edit')->middleware('auth');
+Route::post('users/{user_id}/update', 'UsersController@update');
+Route::get('users/{user_id}/detail','UsersController@show')->middleware('auth');
+
+
 
 
 

@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Auth;
 class EventController extends Controller
 {
 
-    public function setEvents(Follower $follower){
+    public function setEvents(Follower $follower)
+    {
         $this->carbon = new Carbon;
         $user = Auth::user();
         $user_id = $user->id;
@@ -71,7 +72,8 @@ class EventController extends Controller
     }
 
     // "2019-12-12T00:00:00+09:00"のようなデータを今回のDBに合うように"2019-12-12"
-    public function formatDate($date){
+    public function formatDate($date)
+    {
         return str_replace('T00:00:00+09:00', '', $date);
     }
 
@@ -90,7 +92,8 @@ class EventController extends Controller
     }
 
     // ajaxで受け取ったデータをデータベースに追加し、今度はidを返す。
-    public function editEventDate(Request $request){
+    public function editEventDate(Request $request)
+    {
         $data = $request->all();
         $event = Plan::find($data['id']);
         $event->date = $data['newDate'];
@@ -99,7 +102,8 @@ class EventController extends Controller
     }
 
 
-    public function calendar(){
+    public function calendar()
+    {
         return view('calendar');
     }
 }

@@ -86,10 +86,14 @@ class User extends Authenticatable
                 ->update([
                     'profile_image' => basename($file_name),
                     'birthday'         => $params['birthday'],
+                    'name'          => $params['name'],
+                    'email'         => $params['email'],
                 ]);
         } else {
             $this::where('id', $this->id)
                 ->update([
+                    'name'          => $params['name'],
+                    'email'         => $params['email'],
                     'birthday'      => $params['birthday'],
                 ]);
         }
