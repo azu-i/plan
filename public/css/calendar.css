@@ -1,11 +1,10 @@
-
 .fc-sun {
-    background-color:#fae6e3;
-}
-.fc-sat {
-    background-color:#dceef7;
+    color: red;
+    background-color: #FFE4E1;
 }
 
-.holiday{
-    color:red;
+/* 土曜日 */
+.fc-sat {
+    color: blue;
+    background-color: #F5FFFA;
 }

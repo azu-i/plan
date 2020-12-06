@@ -20,7 +20,6 @@
              <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
             <!-- Ajax -->
              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-             <!-- fullcalendar -->
              <!--js-->
              <script src="{{ asset('js/fullcalendar/main.js') }}"></script>
             <!--css-->
@@ -48,6 +47,9 @@
                             </div>
                             <div class="navbar-nav">
                                 <a class="nav-item nav-link" href="{{ url('/users') }}">フォロー画面</a>
+                            </div>
+                            <div class="navbar-nav">
+                                <a class="nav-item nav-link" href="{{ url('/users/edit') }}">ユーザー情報編集</a>
                             </div>
                         </div>
 

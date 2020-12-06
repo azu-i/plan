@@ -10,9 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
             color:'white',
             textColor: 'red',
           },
-        //   {
-        //     googleCalendarId: 'hoge-na-calendar@group.calendar.google.com',
-        //   }
+
         ],
         defaultView: 'dayGridMonth',
         height: 700 ,

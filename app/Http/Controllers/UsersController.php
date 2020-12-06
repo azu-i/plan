@@ -39,4 +39,28 @@ class UsersController extends Controller
             return back();
         }
     }
+
+    public function edit(User $user){
+        return view('users.edit', ['user' => $user]);
+    }
+
+    public function update(Request $request, User $user){
+        $data = $request -> all();
+        $validator = Validator::make($data, [
+            'birthday'      => ['date'],
+            'profile_image' => ['file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+        ]);
+        $validator->validate();
+        $user->updateProfile($data);
+
+        return redirect('/users'.$user->id);
+    }
+
+    public function show(User $user){
+        $login_user = Auth::user();
+        return view('users.show',[
+            'login_user' => $login_user,
+            'user'       =>$user,
+        ]);
+    }
 }

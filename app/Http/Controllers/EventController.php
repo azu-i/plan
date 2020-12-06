@@ -30,26 +30,42 @@ class EventController extends Controller
 
         //カレンダーの期間内のイベントを取得
         if($followed_ids != null){
-            $events = Plan::whereIn('user_id', $followed_ids)->whereBetween('date', [$start, $end])->select('id', 'event_name', 'date','time','image_path')->get();
+            $events = Plan::whereIn('user_id', $followed_ids)->whereBetween('date', [$start, $end])->select('user_id','id', 'event_name', 'date','time')->get();
         }else{
-            $events = Plan::where('user_id', $user->id)->whereBetween('date', [$start, $end])->select('id', 'event_name', 'date','time','image_path')->get();
+            $events = Plan::where('user_id', $user->id)->whereBetween('date', [$start, $end])->select('user_id','id', 'event_name', 'date','time')->get();
         }
+        // #008000=緑 #6a5acd=紫 #b22222=赤茶 #696969=グレイ #ff69b4=ピンク #00008b=青
+        $event_color = ['#008000','#6a5acd','#b22222','#696969','#ff69b4','#00008b'];
 
         //新たな配列を用意し、 EventsObjectが対応している配列にキーの名前を変更する
         $newArr = [];
-        foreach($events as $item){
-            $newItem["title"] = $item["event_name"];
-            if($item["time"] != null){
-                $newItem["start"] = $item["date"] . "T" . $item["time"];
-            }else{
-                $newItem["start"] = $item["date"];
+        if($events["user_id"] = $user->id){
+            foreach($events as $item){
+                $newItem["title"] = $item["event_name"];
+                // 時間設定がある場合は時間も表示
+                if($item["time"] != null){
+                    $newItem["start"] = $item["date"] . "T" . $item["time"];
+                }else{
+                    $newItem["start"] = $item["date"];
+                }
+                $newItem["color"] = '#e6b422';
+                $newArr[] = $newItem;
             }
-            // $newItem["start"] = $item["time"];
-            // $newItem["start"] = $item["date"] ;
-            $newItem["img"] = $item["image_path"] ;
-            $newArr[] = $newItem;
+        }else{
+            foreach($events as $item){
+                $newItem["title"] = $item["event_name"];
+                // 時間設定がある場合は時間も表示
+                if($item["time"] != null){
+                    $newItem["start"] = $item["date"] . "T" . $item["time"];
+                }else{
+                    $newItem["start"] = $item["date"];
+                }
+                for($i=0; $i<count($followed_ids);$i++){
+                    $newItem["color"] = $event_color[$i];
+                }
+                $newArr[] = $newItem;
+            }
         }
-
         echo json_encode($newArr);
 
     }

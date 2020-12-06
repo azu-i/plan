@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','profile_image','birthday'
     ];
 
     /**
@@ -37,6 +37,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // Plan/Userの関係性
     public function plans(){
     return $this->hasMany('App\Plan');
     }
@@ -51,6 +52,7 @@ class User extends Authenticatable
         return $this->belongsToMany(self::class, 'followers', 'following_id', 'followed_id');
     }
 
+    // 全てのユーザー取得
     public function getAllUsers(Int $user_id)
     {
         return $this->where('id', '<>', $user_id)->paginate(10);
@@ -75,4 +77,23 @@ class User extends Authenticatable
     {
         return $this->followers()->where('following_id', $user->id)->exists();
     }
+
+    public function updateProfile(Array $params){
+        if (isset($params['profile_image'])){
+            $file_name = $params['profile_image']->store('public/profile_image/');
+
+            $this::where('id', $this->id)
+                ->update([
+                    'profile_image' => basename($file_name),
+                    'birthday'         => $params['birthday'],
+                ]);
+        } else {
+            $this::where('id', $this->id)
+                ->update([
+                    'birthday'      => $params['birthday'],
+                ]);
+        }
+        return;
+    }
+
 }
