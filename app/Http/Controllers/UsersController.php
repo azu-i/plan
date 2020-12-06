@@ -48,16 +48,20 @@ class UsersController extends Controller
         return view('users.edit', ['login_user' => $login_user]);
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
         $data = $request->all();
-        $validator = Validator::make($data, [
-            'name'          => ['required', 'string', 'max:255'],
-            'profile_image' => ['file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
-            'email'         => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)]
-        ]);
-        $validator->validate();
-        $user->updateProfile($data);
+        $user = Auth::user();
+        unset($data['_token']);
+        $user->fill($data)->save();
+
+        // $validator = Validator::make($data, [
+        //     'name'          => ['required', 'string', 'max:255'],
+        //     'profile_image' => ['file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+        //     'email'         => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)]
+        // ]);
+        // $validator->validate();
+        // $user->updateProfile($data);
 
         return redirect('users/'.$user->id);
     }

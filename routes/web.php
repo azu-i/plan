@@ -41,7 +41,7 @@ Route::get('users/{user_id}/unfollow', 'UsersController@unfollow')->name('unfoll
 
 // user編集
 Route::get('users/{user_id}/edit', 'UsersController@edit')->middleware('auth');
-Route::post('users/{user_id}/update', 'UsersController@update');
+Route::post('users/{user_id}/edit', 'UsersController@update');
 Route::get('users/{user_id}/detail','UsersController@show')->middleware('auth');
 
 
