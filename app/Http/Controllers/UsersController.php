@@ -42,28 +42,36 @@ class UsersController extends Controller
         }
     }
 
-    public function edit()
+    public function edit(User $user)
     {
         $login_user = Auth::user();
-        return view('users.edit', ['login_user' => $login_user]);
+        return view('users.edit', ['login_user' => $login_user, 'user' => $user]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, User $user)
     {
         $data = $request->all();
-        $user = Auth::user();
-        unset($data['_token']);
-        $user->fill($data)->save();
+        $validator = Validator::make($data, [
+            'profile_image' => 'file||image||mimes:jpeg,png,jpg||max:2048',
+            'birthday'         => 'string||date'
+        ]);
+        $validator->validate();
+        $editUser = User::find(Auth::id());
+        $plusInfo = $request -> all();
+        if ($request->remove == 'true') {
+            $plusInfo['profile_image'] = null;
+        } elseif ($request->file('image')) {
+            $path = $request->file('image')->store('public/image');
+            $plusInfo['profile_image'] = basename($path);
+        } else {
+            $plusInfo['profile_image'] = $editUser->profile_image;
+        }
 
-        // $validator = Validator::make($data, [
-        //     'name'          => ['required', 'string', 'max:255'],
-        //     'profile_image' => ['file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
-        //     'email'         => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)]
-        // ]);
-        // $validator->validate();
-        // $user->updateProfile($data);
-
-        return redirect('users/'.$user->id);
+        unset($news_form['image']);
+        unset($news_form['remove']);
+        unset($plusInfo['_token']);
+        $editUser -> fill($plusInfo) -> save();
+        return redirect('users/{user_id}/detail');
     }
 
         public function show()

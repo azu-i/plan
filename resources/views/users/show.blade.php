@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="d-inline-flex">
                     <div class="p-3 d-flex flex-column">
-                        @if($login_user->profile_image = null)
+                        @if($login_user->profile_image == null)
                             <img src="image/profileimage.jpeg" class="rounded-circle" width="100" height="100">
                         @else
                             <img src="{{ $login_user->profile_image }}" class="rounded-circle" width="100" height="100">

@@ -26,8 +26,8 @@ class EventController extends Controller
 
 
         // 期間の始まりと終わり
-        $start = $this->carbon->copy()->startOfWeek();
-        $end = $this->carbon->copy()->endOfWeek();
+        $start = $this->carbon->copy()->startOfMonth();
+        $end = $this->carbon->copy()->endOfMonth();
 
         //カレンダーの期間内のイベントを取得
         if($followed_ids != null){
@@ -40,7 +40,6 @@ class EventController extends Controller
 
         //新たな配列を用意し、 EventsObjectが対応している配列にキーの名前を変更する
         $newArr = [];
-        if($events["user_id"] = $user->id){
             foreach($events as $item){
                 $newItem["title"] = $item["event_name"];
                 // 時間設定がある場合は時間も表示
@@ -49,26 +48,9 @@ class EventController extends Controller
                 }else{
                     $newItem["start"] = $item["date"];
                 }
-                $newItem["color"] = '#e6b422';
                 $newArr[] = $newItem;
             }
-        }else{
-            foreach($events as $item){
-                $newItem["title"] = $item["event_name"];
-                // 時間設定がある場合は時間も表示
-                if($item["time"] != null){
-                    $newItem["start"] = $item["date"] . "T" . $item["time"];
-                }else{
-                    $newItem["start"] = $item["date"];
-                }
-                for($i=0; $i<count($followed_ids);$i++){
-                    $newItem["color"] = $event_color[$i];
-                }
-                $newArr[] = $newItem;
-            }
-        }
         echo json_encode($newArr);
-
     }
 
     // "2019-12-12T00:00:00+09:00"のようなデータを今回のDBに合うように"2019-12-12"

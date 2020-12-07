@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Request;
 
 class User extends Authenticatable
 {
@@ -76,28 +77,6 @@ class User extends Authenticatable
     public function isFollowed($user)
     {
         return $this->followers()->where('following_id', $user->id)->exists();
-    }
-
-    public function updateProfile(Array $params){
-        if (isset($params['profile_image'])){
-            $file_name = $params['profile_image']->store('public/profile_image/');
-
-            $this::where('id', $this->id)
-                ->update([
-                    'profile_image' => basename($file_name),
-                    'birthday'         => $params['birthday'],
-                    'name'          => $params['name'],
-                    'email'         => $params['email'],
-                ]);
-        } else {
-            $this::where('id', $this->id)
-                ->update([
-                    'name'          => $params['name'],
-                    'email'         => $params['email'],
-                    'birthday'      => $params['birthday'],
-                ]);
-        }
-        return;
     }
 
 }
