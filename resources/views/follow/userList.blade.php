@@ -7,6 +7,11 @@
                 @foreach($all_users as $user)
                     <div class="card">
                         <div class="card-haeder p-3 w-100 d-flex">
+                            @if($user->profile_image == null)
+                            <img src={{ asset("image/profileimage.jpeg") }} class="rounded-circle" width="50" height="50">
+                            @else
+                            <img src={{ asset("storage/image/".$user->profile_image)}}   class="rounded-circle" width="50" height="50">
+                            @endif
                             <div class="ml-2 d-flex flex-column">
                                 <p class="mb-0">{{ $user->name }}</p>
                             </div>

@@ -34,20 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
         events: "/setEvents",
         eventColor: '#FF9999',
 
-        eventDrop: function(info){
-            //eventをドラッグしたときの処理
-            //editEventDate(info);
-            //あとで使う関数
-        },
-
-        dateClick: function(info) {
-            //日付をクリックしたときの処理
-            // addEvent(calendar,info);
-            //あとで使う関数
-
-
-        },
-
     });
     calendar.render();
 

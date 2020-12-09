@@ -50,27 +50,27 @@ class UsersController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $data = $request->all();
-        $validator = Validator::make($data, [
-            'profile_image' => 'file||image||mimes:jpeg,png,jpg||max:2048',
-            'birthday'         => 'string||date'
-        ]);
-        $validator->validate();
+        // $data = $request->all();
+        // $validator = Validator::make($data, [
+        //     'profile_image' => 'file||image||mimes:jpeg,png,jpg||max:2048',
+        //     'birthday'         => 'string||date'
+        // ]);
+        // $validator->validate();
         $editUser = User::find(Auth::id());
         $plusInfo = $request -> all();
         if ($request->remove == 'true') {
             $plusInfo['profile_image'] = null;
-        } elseif ($request->file('image')) {
-            $path = $request->file('image')->store('public/image');
+        } elseif ($request->file('profile_image')) {
+            $path = $request->file('profile_image')->store('public/image');
             $plusInfo['profile_image'] = basename($path);
         } else {
             $plusInfo['profile_image'] = $editUser->profile_image;
         }
 
-        unset($news_form['image']);
-        unset($news_form['remove']);
+        unset($plusInfo['remove']);
         unset($plusInfo['_token']);
         $editUser -> fill($plusInfo) -> save();
+
         return redirect('users/{user_id}/detail');
     }
 
