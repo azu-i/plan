@@ -35,8 +35,6 @@ class EventController extends Controller
         }else{
             $events = Plan::where('user_id', $user->id)->whereBetween('date', [$start, $end])->select('user_id','id', 'event_name', 'date','time')->get();
         }
-        // #008000=緑 #6a5acd=紫 #b22222=赤茶 #696969=グレイ #ff69b4=ピンク #00008b=青
-        $event_color = ['#008000','#6a5acd','#b22222','#696969','#ff69b4','#00008b'];
 
         //新たな配列を用意し、 EventsObjectが対応している配列にキーの名前を変更する
         $newArr = [];
@@ -48,11 +46,29 @@ class EventController extends Controller
                 }else{
                     $newItem["start"] = $item["date"];
                 }
+
                 $newArr[] = $newItem;
             }
+            // foreach($events as $item){
+            //     // #00008b=青
+            //     // #008000=緑 #6a5acd=紫 #b22222=赤茶 #696969=グレイ #ff69b4=ピンク
+            //     $event_color = ['#008000','#6a5acd','#b22222','#696969','#ff69b4'];
+            //     if($item[$user_id] = $user){
+            //         $newItem["color"] = "#008000";
+            //     }elseif($item[$user_id] = $followed_ids[0]){
+            //         $newItem["color"] = $event_color[0];
+            //     }elseif($item[$user_id] = $followed_ids[1]){
+            //         $newItem["color"] = $event_color[1];
+            //     }
+            //     $newArr[] = $newItem;
+            // }
         echo json_encode($newArr);
     }
 
+    public function setColor(Follower $follower){
+        
+
+    }
     // "2019-12-12T00:00:00+09:00"のようなデータを今回のDBに合うように"2019-12-12"
     public function formatDate($date)
     {
