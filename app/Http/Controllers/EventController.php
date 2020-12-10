@@ -49,24 +49,25 @@ class EventController extends Controller
 
                 $newArr[] = $newItem;
             }
-            // foreach($events as $item){
-            //     // #00008b=青
-            //     // #008000=緑 #6a5acd=紫 #b22222=赤茶 #696969=グレイ #ff69b4=ピンク
-            //     $event_color = ['#008000','#6a5acd','#b22222','#696969','#ff69b4'];
-            //     if($item[$user_id] = $user){
-            //         $newItem["color"] = "#008000";
-            //     }elseif($item[$user_id] = $followed_ids[0]){
-            //         $newItem["color"] = $event_color[0];
-            //     }elseif($item[$user_id] = $followed_ids[1]){
-            //         $newItem["color"] = $event_color[1];
-            //     }
-            //     $newArr[] = $newItem;
+            // for($i=0; $i<count($events); $i++){
+                // #00008b=青
+                // #008000=緑 #6a5acd=紫 #b22222=赤茶 #696969=グレイ #ff69b4=ピンク
+                // $event_color = ['#008000','#6a5acd','#b22222','#696969','#ff69b4'];
+                // if($events["user_id"] = $user){
+                //     $newItem["color"] = "#008000";
+                // }elseif($events["user_id"] = $followed_ids[0]){
+                //     $newItem["color"] = $event_color[0];
+                // }elseif($events["user_id"] = $followed_ids[1]){
+                //     $newItem["color"] = $event_color[1];
+                // }
+                // $newArr[] = $newItem;
             // }
         echo json_encode($newArr);
+    
     }
 
     public function setColor(Follower $follower){
-        
+
 
     }
     // "2019-12-12T00:00:00+09:00"のようなデータを今回のDBに合うように"2019-12-12"
