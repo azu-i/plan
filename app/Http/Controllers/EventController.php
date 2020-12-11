@@ -49,26 +49,59 @@ class EventController extends Controller
 
                 $newArr[] = $newItem;
             }
-            // for($i=0; $i<count($events); $i++){
-                // #00008b=青
-                // #008000=緑 #6a5acd=紫 #b22222=赤茶 #696969=グレイ #ff69b4=ピンク
-                // $event_color = ['#008000','#6a5acd','#b22222','#696969','#ff69b4'];
-                // if($events["user_id"] = $user){
-                //     $newItem["color"] = "#008000";
-                // }elseif($events["user_id"] = $followed_ids[0]){
-                //     $newItem["color"] = $event_color[0];
-                // }elseif($events["user_id"] = $followed_ids[1]){
-                //     $newItem["color"] = $event_color[1];
-                // }
-                // $newArr[] = $newItem;
+            //イベントの色の設定
+            // if($events["user_id"] = $user){
+            //     $newItem["color"] = "#008000";
+            // }
+            // for($i=0; $i<count($followed_ids); $i++){
+            //     #00008b=青
+            //     #008000=緑 #6a5acd=紫 #b22222=赤茶 #696969=グレイ #ff69b4=ピンク
+            //     $event_color = ['#008000','#6a5acd','#b22222','#696969','#ff69b4'];
+            //     if($events["user_id"] = $followed_ids[$i]){
+            //         $newItem["color"] = $event_color[$i];
+            //     }
+            //     $newArr[] = $newItem;
             // }
         echo json_encode($newArr);
-    
+
     }
 
     public function setColor(Follower $follower){
+        $this->carbon = new Carbon;
+        $user = Auth::user();
+        $user_id = $user->id;
 
+         // followed_idだけ抜き出す
+         $follow_ids = $follower->followingIds($user_id);
+         //ログイン中のfollowing_idに紐づくfollowed_idをarrayで取り出す
+         $followed_ids = $follow_ids->pluck('followed_id')->toArray();
+         array_push($followed_ids ,$user_id);
+        //  dd($followed_ids);
 
+         // 期間の始まりと終わり
+        $start = $this->carbon->copy()->startOfMonth();
+        $end = $this->carbon->copy()->endOfMonth();
+
+          //カレンダーの期間内のイベントを取得
+        if($followed_ids != null){
+            $colorselect = Plan::whereIn('user_id', $followed_ids)->whereBetween('date', [$start, $end])->select('user_id','id')->get();
+        }else{
+            $colorselect = Plan::where('user_id', $user->id)->whereBetween('date', [$start, $end])->select('user_id','id')->get();
+        }
+
+            if($colorselect["user_id"] == $user_id){
+               $color = "#008000";
+            }else{
+                for($i=0; $i<count($colorselect); $i++){
+                    #00008b=青
+                    #008000=緑 #6a5acd=紫 #b22222=赤茶 #696969=グレイ #ff69b4=ピンク
+                    $event_color = ['#008000','#6a5acd','#b22222','#696969','#ff69b4'];
+                    if($colorselect["user_id"] = $followed_ids[$i]){
+                        $color =  $event_color[$i];
+                }
+            }
+            }
+            return $color;
     }
     // "2019-12-12T00:00:00+09:00"のようなデータを今回のDBに合うように"2019-12-12"
     public function formatDate($date)

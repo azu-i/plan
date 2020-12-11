@@ -22,6 +22,7 @@ Route::get('/', 'HomeController@index')->name('home')->middleware('auth');
 
 
 Route::get('/setEvents', 'EventController@setEvents')->middleware('auth');
+Route::get('/setColor', 'EventController@setColor')->middleware('auth');
 
 
 Route::post('/ajax/addEvent', 'EventController@addEvent');
