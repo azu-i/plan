@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Follower;
+
 use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
@@ -48,7 +49,9 @@ class UsersController extends Controller
         return view('users.edit', ['login_user' => $login_user, 'user' => $user]);
     }
 
-    public function update(Request $request, User $user)
+    // ユーザー情報の編集
+    // @param Request
+    public function update(Request $request)
     {
         // $data = $request->all();
         // $validator = Validator::make($data, [
@@ -74,11 +77,42 @@ class UsersController extends Controller
         return redirect('users/{user_id}/detail');
     }
 
-        public function show()
+    public function show()
     {
         $login_user = Auth::user();
         return view('users.show',[
             'login_user' => $login_user,
         ]);
     }
+
+    public function userViewList(Follower $follower){
+        $auth = Auth::user();
+        $authuser_id = $auth->id;
+        $lists = new User();
+
+        // followed_idだけ抜き出す
+        $follow_ids = $follower->followingIds($authuser_id);
+        //ログイン中のfollowing_idに紐づくfollowed_idをarrayで取り出す
+        $followed_ids = $follow_ids->pluck('followed_id')->toArray();
+        array_push($followed_ids ,$authuser_id);
+        //カレンダーの期間内のイベントを取得
+        if($followed_ids !== null){
+            $lists= User::whereIn('id', $followed_ids)->select('id','name')->get();
+        }else{
+            $lists = User::where('id', $authuser_id)->select('id','name')->get();
+        }
+
+        if($lists["id"] == $authuser_id){
+            $color= "00008b";
+        }else{
+            $result = array_search($lists["id"], $followed_ids);
+            // #008000=緑 #6a5acd=紫 #b22222=赤茶 #696969=グレイ #ff69b4=ピンク
+            $event_color = ['#008000','#6a5acd','#b22222','#696969','#ff69b4'];
+            $color = $event_color[$result];
+        }
+        return view('calendar', ['lists' => $lists, 'color' => $color]);
+
+    }
+
+
 }

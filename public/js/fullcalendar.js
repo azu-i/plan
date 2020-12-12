@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
         selectLongPressDelay:0,
 
         events: "/setEvents",
-        eventColor:"/setColor"
     });
     calendar.render();
 

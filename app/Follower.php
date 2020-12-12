@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Follower extends Model
@@ -19,8 +20,10 @@ class Follower extends Model
     public $incrementing = false;
 
     // フォローしているユーザーのID取得
-    public function followingIds(Int $user_id)
+    public function followingIds()
     {
+        $authuser = Auth::user();
+        $user_id = $authuser->id;
         return $this->where('following_id', $user_id)->get('followed_id');
     }
 
