@@ -80,7 +80,6 @@
                     </thead>
                     <tbody>
                         @foreach($posts as $plan)
-
                             <tr>
                                 <th>{{ $plan->event_name }}</th>
                                 <th>{{ $plan->date }}</th>

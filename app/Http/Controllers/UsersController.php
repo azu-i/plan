@@ -88,31 +88,33 @@ class UsersController extends Controller
     public function userViewList(Follower $follower){
         $auth = Auth::user();
         $authuser_id = $auth->id;
-        $lists = new User();
 
         // followed_idだけ抜き出す
         $follow_ids = $follower->followingIds($authuser_id);
         //ログイン中のfollowing_idに紐づくfollowed_idをarrayで取り出す
         $followed_ids = $follow_ids->pluck('followed_id')->toArray();
         array_push($followed_ids ,$authuser_id);
+
         //カレンダーの期間内のイベントを取得
         if($followed_ids !== null){
             $lists= User::whereIn('id', $followed_ids)->select('id','name')->get();
         }else{
             $lists = User::where('id', $authuser_id)->select('id','name')->get();
         }
+        // $color =array();
 
-        if($lists["id"] == $authuser_id){
-            $color= "00008b";
-        }else{
-            $result = array_search($lists["id"], $followed_ids);
-            // #008000=緑 #6a5acd=紫 #b22222=赤茶 #696969=グレイ #ff69b4=ピンク
-            $event_color = ['#008000','#6a5acd','#b22222','#696969','#ff69b4'];
-            $color = $event_color[$result];
+        foreach($lists as $list){
+            if($list["id"] == $authuser_id){
+                $colors= "00008b";
+            }else{
+                $result = array_search($list["id"], $followed_ids);
+                // #008000=緑 #6a5acd=紫 #b22222=赤茶 #696969=グレイ #ff69b4=ピンク
+                $event_color = ['#008000','#6a5acd','#b22222','#696969','#ff69b4'];
+                $colors= $event_color[$result];
+            }
         }
-        return view('calendar', ['lists' => $lists, 'color' => $color]);
-
+        return view('calendar', ['lists' => $lists, 'colors' => $colors, 'result'=>$result]);
     }
 
-
 }
+
