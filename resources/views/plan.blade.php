@@ -21,26 +21,6 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-7" name="image_path">予定アイコン</label>
-                        <div class="checkbox">
-                            <label class="checkbox-inline">
-                                <input src="" type="checkbox" name="checkbox[]" value="1"><img src="image/cake.jpeg" alt="誕生日アイコン">誕生日
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="checkbox[]" value="2"><img src="image/food.jpeg" alt="食事アイコン">食事
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="checkbox[]" value="3"><img src="image/hairsalon.jpeg" alt="美容院アイコン">美容院
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="checkbox[]" value="4"><img src="image/beer.jpeg" alt="飲み会アイコン">飲み会
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="checkbox[]" value="5"><img src="image/calendar.png" alt="その他予定アイコン">その他予定
-                            </label>
-                        </div>
-                </div>
-                <div class="form-group row">
                     <label class="col-md-7">日付  ※</label>
                     <div class="col-md-10">
                         <input type="date" value="<?php echo date('Y-m-d'); ?>"class="form-control" name="date" value="{{ old('date') }}">

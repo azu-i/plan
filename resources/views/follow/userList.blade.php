@@ -20,6 +20,7 @@
                                 <span class="px-1 bg-secondary text-light">フォロー中</span>
                             </div>
                             @endif
+                            
                             <div class="d-flex justify-content-end flex-grow-1">
                                 @if(auth()->user()->isFollowing($user))
                                     <a  class="btn btn-danger" href="{{ action('UsersController@unfollow', ['id' => $user->id]) }}">フォロー解除</a>
