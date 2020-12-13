@@ -95,27 +95,23 @@ class UsersController extends Controller
         $followed_ids = $follow_ids->pluck('followed_id')->toArray();
         array_push($followed_ids ,$authuser_id);
 
-        $lists = array();
         //カレンダーの期間内のイベントを取得
         if($followed_ids !== null){
             $lists= User::whereIn('id', $followed_ids)->select('id','name')->get();
         }else{
             $lists = User::where('id', $authuser_id)->select('id','name')->get();
         }
-
         foreach($lists as $list){
             if($list["id"] == $authuser_id){
-                $colors= "00008b";
+                $list["color"] = "#00008b";
             }else{
                 $result = array_search($list["id"], $followed_ids);
                 // #008000=緑 #6a5acd=紫 #b22222=赤茶 #696969=グレイ #ff69b4=ピンク
                 $event_color = ['#008000','#6a5acd','#b22222','#696969','#ff69b4'];
-                $colors= $event_color[$result];
+                $list["color"] = $event_color[$result];
             }
         }
-        return view('calendar', ['lists' => $lists, 'colors' => $colors]);
-        echo $colors;
+        return view('calendar', ['lists' => $lists]);
     }
-
 }
 

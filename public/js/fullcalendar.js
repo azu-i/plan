@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', function() {
         height: 700 ,
         editable: true,
         displayEventTime: true,
-        // displayEventEnd:true,
-        timeFormat:"HH:mm",
+        timeFormat: 'H(:mm)',
         //1→月曜日始まり、0→日曜日始まり
         firstDay : 0,
+        
         headerToolbar: {
             left: "dayGridMonth,listMonth",
             center: "title",

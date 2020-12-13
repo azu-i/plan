@@ -50,7 +50,7 @@ class EventController extends Controller
             // イベントの色の設定
             // #00008b=青
             if($item["user_id"] == $user_id){
-                $newItem["color"] = "00008b";
+                $newItem["color"] = "#00008b";
             }else{
                 $result = array_search($item["user_id"], $followed_ids);
                 // #008000=緑 #6a5acd=紫 #b22222=赤茶 #696969=グレイ #ff69b4=ピンク
