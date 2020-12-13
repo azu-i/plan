@@ -95,13 +95,13 @@ class UsersController extends Controller
         $followed_ids = $follow_ids->pluck('followed_id')->toArray();
         array_push($followed_ids ,$authuser_id);
 
+        $lists = array();
         //カレンダーの期間内のイベントを取得
         if($followed_ids !== null){
             $lists= User::whereIn('id', $followed_ids)->select('id','name')->get();
         }else{
             $lists = User::where('id', $authuser_id)->select('id','name')->get();
         }
-        // $color =array();
 
         foreach($lists as $list){
             if($list["id"] == $authuser_id){
@@ -113,7 +113,8 @@ class UsersController extends Controller
                 $colors= $event_color[$result];
             }
         }
-        return view('calendar', ['lists' => $lists, 'colors' => $colors, 'result'=>$result]);
+        return view('calendar', ['lists' => $lists, 'colors' => $colors]);
+        echo $colors;
     }
 
 }
