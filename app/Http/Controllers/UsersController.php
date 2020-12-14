@@ -103,7 +103,7 @@ class UsersController extends Controller
         }
         foreach($lists as $list){
             if($list["id"] == $authuser_id){
-                $list["color"] = "#00008b";
+                $list["color"] = "#0099FF";
             }else{
                 $result = array_search($list["id"], $followed_ids);
                 // #008000=緑 #6a5acd=紫 #b22222=赤茶 #696969=グレイ #ff69b4=ピンク
