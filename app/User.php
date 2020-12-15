@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
+use App\Follower;
 
 class User extends Authenticatable
 {
@@ -79,4 +80,11 @@ class User extends Authenticatable
         return $this->followers()->where('following_id', $user->id)->exists();
     }
 
+    public function isAccepted($user){
+        return $this->follows()->where('following_id',$user->id)->get();
+     }
+
+     public function isAccepting($user){
+         return $this->followers()->where('followed_id',$user->id)->get();
+     }
 }

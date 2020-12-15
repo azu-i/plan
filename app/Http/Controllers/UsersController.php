@@ -25,7 +25,7 @@ class UsersController extends Controller
     public function follow(Request $request)
     {
         $followed_user = User::find($request->user_id);
-        $auth_user = auth()->user();
+        $auth_user = Auth::user();
         if(!$auth_user->isFollowing($followed_user)){
             $auth_user->follow($followed_user->id);
             return back();
@@ -36,7 +36,7 @@ class UsersController extends Controller
     public function unfollow(Request $request)
     {
         $followed_user = User::find($request->user_id);
-        $auth_user = auth()->user();
+        $auth_user = Auth::user();
         if($auth_user->isFollowing($followed_user)){
             $auth_user->unfollow($followed_user->id);
             return back();
@@ -53,12 +53,6 @@ class UsersController extends Controller
     // @param Request
     public function update(Request $request)
     {
-        // $data = $request->all();
-        // $validator = Validator::make($data, [
-        //     'profile_image' => 'file||image||mimes:jpeg,png,jpg||max:2048',
-        //     'birthday'         => 'string||date'
-        // ]);
-        // $validator->validate();
         $editUser = User::find(Auth::id());
         $plusInfo = $request -> all();
         if ($request->remove == 'true') {
@@ -94,6 +88,7 @@ class UsersController extends Controller
         //ログイン中のfollowing_idに紐づくfollowed_idをarrayで取り出す
         $followed_ids = $follow_ids->pluck('followed_id')->toArray();
         array_push($followed_ids ,$authuser_id);
+
 
         //カレンダーの期間内のイベントを取得
         if($followed_ids !== null){

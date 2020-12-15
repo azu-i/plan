@@ -19,12 +19,11 @@ class Follower extends Model
     public $timestamps = false;
     public $incrementing = false;
 
-    // フォローしているユーザーのID取得
+    // フォローしているテーブルの取得
     public function followingIds()
     {
         $authuser = Auth::user();
         $user_id = $authuser->id;
-        return $this->where('following_id', $user_id)->get('followed_id');
+        return $this->where('following_id', $user_id)->get();
     }
-
 }
