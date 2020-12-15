@@ -81,10 +81,12 @@ class User extends Authenticatable
     }
 
     public function isAccepted($user){
-        return $this->follows()->where('following_id',$user->id)->get();
+        $ifAccepted = $this->follows()->where('following_id',$user->id)->get('accepted');
+        return $ifAccepted;
      }
 
      public function isAccepting($user){
-         return $this->followers()->where('followed_id',$user->id)->get();
+         $ifAccepting = $this->followers()->where('followed_id',$user->id)->get('accepted');
+         return $ifAccepting;
      }
 }

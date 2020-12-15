@@ -17,11 +17,10 @@
                             </div>
                             @if(Auth::user()->isFollowing($user))
                             <div class="px-2">
-                                @if(!$user->accepted)
-                                @elseif(Auth::user()->isAccepted($user)->accepted == 'true')
-                                <span class="px-1 bg-secondary text-light">フォロー中</span>
-                                @else
+                                @if($user->isAccepted($user) == '0')
                                 <span class="px-1 bg-secondary text-light">承認待ち</span>
+                                @elseif($user->isAccepted($user) == 'true')
+                                <span class="px-1 bg-secondary text-light">フォロー中</span>
                                 @endif
                             </div>
                             @endif

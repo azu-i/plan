@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Plan;
+use App\User;
 use Carbon\Carbon;
 use App\Follower;
 use Illuminate\Support\Facades\Auth;
@@ -93,8 +94,34 @@ class EventController extends Controller
     }
 
 
-    public function calendar()
+    public function calendar(Follower $follower)
     {
-        return view('calendar');
+        $auth = Auth::user();
+        $authuser_id = $auth->id;
+
+        // followed_idだけ抜き出す
+        $follow_ids = $follower->followingIds($authuser_id);
+        //ログイン中のfollowing_idに紐づくfollowed_idをarrayで取り出す
+        $followed_ids = $follow_ids->pluck('followed_id')->toArray();
+        array_push($followed_ids ,$authuser_id);
+
+
+        //カレンダーの期間内のイベントを取得
+        if($followed_ids !== null){
+            $lists= User::whereIn('id', $followed_ids)->select('id','name')->get();
+        }else{
+            $lists = User::where('id', $authuser_id)->select('id','name')->get();
+        }
+        foreach($lists as $list){
+            if($list["id"] == $authuser_id){
+                $list["color"] = "#0099FF";
+            }else{
+                $result = array_search($list["id"], $followed_ids);
+                // #008000=緑 #6a5acd=紫 #b22222=赤茶 #696969=グレイ #ff69b4=ピンク
+                $event_color = ['#008000','#6a5acd','#b22222','#696969','#ff69b4'];
+                $list["color"] = $event_color[$result];
+            }
+        }
+        return view('calendar',['lists' => $lists]);
     }
 }
