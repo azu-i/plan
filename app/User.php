@@ -60,6 +60,16 @@ class User extends Authenticatable
         return $this->where('id', '<>', $user_id)->paginate(10);
     }
 
+    public function accept($user_id)
+    {
+        return $this->follows()->attach($user_id);
+    }
+
+    public function unaccept($user_id)
+    {
+        return $this->follows()->detach($user_id);
+    }
+
     public function follow($user_id)
     {
         return $this->follows()->attach($user_id);
@@ -81,12 +91,7 @@ class User extends Authenticatable
     }
 
     public function isAccepted($user){
-        $ifAccepted = $this->follows()->where('following_id',$user->id)->get('accepted');
-        return $ifAccepted;
-     }
-
-     public function isAccepting($user){
-         $ifAccepting = $this->followers()->where('followed_id',$user->id)->get('accepted');
-         return $ifAccepting;
-     }
+        $ifAccepted = $this->follows()->where('following_id',$this->id)->where("followed_id", $user->id)->select('accepted')->get();
+        return $ifAccepted[0]->accepted == 1;
+      }
 }

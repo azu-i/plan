@@ -32,6 +32,7 @@ class EventController extends Controller
         $end = $this->carbon->copy()->endOfMonth();
 
         //カレンダーの期間内のイベントを取得
+        
         if($followed_ids != null){
             $events = Plan::whereIn('user_id', $followed_ids)->whereBetween('date', [$start, $end])->select('user_id','id', 'event_name', 'date','time')->get();
         }else{

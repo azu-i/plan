@@ -17,18 +17,29 @@
                             </div>
                             @if(Auth::user()->isFollowing($user))
                             <div class="px-2">
-                                @if($user->isAccepted($user) == '0')
-                                <span class="px-1 bg-secondary text-light">承認待ち</span>
-                                @elseif($user->isAccepted($user) == 'true')
+                                @if(Auth::user()->isAccepted($user))
                                 <span class="px-1 bg-secondary text-light">フォロー中</span>
+                                @else
+                                <span class="px-1 bg-secondary text-light">承認待ち</span>
                                 @endif
                             </div>
                             @endif
+
+                            @if(!Auth::user()->isFollowing($user))
+                            @if(!$user->isAccepted(Auth::user()))
+                            <a  class="btn btn-danger" href="{{ action('UsersController@unfollow', ['id' => $user->id]) }}">承認しない</a>
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <a  class="btn btn-danger" href="{{ action('FollowerAcceptController@accept', ['id' => $user->id]) }}">承認する</a>
+                            @endif
+                            @endif
+
                             <div class="d-flex justify-content-end flex-grow-1">
                                 @if(Auth::user()->isFollowing($user))
                                     <a  class="btn btn-danger" href="{{ action('UsersController@unfollow', ['id' => $user->id]) }}">フォロー解除</a>
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
+
                                 @else
                                     <a  class="btn btn-secondary" href="{{ action('UsersController@follow', ['id' => $user->id]) }}">フォローする</a>
                                     {{ csrf_field() }}
@@ -43,41 +54,4 @@
             {{ $all_users->links() }}
         </div>
     </div>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script> --}}
-    {{-- <script>
-        new Vue({
-            el: '#app',
-            data: {
-                followers: []
-            },
-            methods: {
-                getFollowers() {
-                    const url = '/admin/ajax/user_accept';
-                    axios.get(url)
-                        .then(response => {
-                            this.followers = response.data;
-                          });
-                },
-                accept(followedId, accepted) {
-                    if(confirm('承認状態を変更します。よろしいですか？')) {
-                        const url = '/follower/ajax/follower_accept/accept';
-                        const params = {
-                            followed_id: followedId,
-                            accept: accepted
-                        };
-                        axios.post(url, params)
-                            .then(response => {
-                                if(response.data.result)
-                                    this.getFollowers();
-                                }
-                            });
-                    }
-                }
-            },
-            mounted() {
-                this.getFollowers()
-            }
-        });
-    </script> --}}
 @endsection
