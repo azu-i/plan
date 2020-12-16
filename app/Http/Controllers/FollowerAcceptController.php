@@ -10,10 +10,9 @@ class FollowerAcceptController extends Controller
 {
 
     public function accept(Request $request) {
-        $followed = Follower::find($request->followed_id);
-        dd($followed);
-        $followed->accepted = $request->accept;
-        $result = $followed->save();
+        $followAccept = Follower::find($request->id);
+        $followAccept->accepted = $request->accept;
+        $result = $followAccept->save();
         return ['result' => $result];
     }
 }

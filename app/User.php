@@ -70,26 +70,33 @@ class User extends Authenticatable
         return $this->follows()->detach($user_id);
     }
 
+    // フォローする
     public function follow($user_id)
     {
         return $this->follows()->attach($user_id);
     }
 
+    // フォロー解除する
     public function unfollow($user_id)
     {
         return $this->follows()->detach($user_id);
     }
-
+    // フォローしているか
     public function isFollowing($user)
     {
         return $this->follows()->where('followed_id', $user->id)->exists();
     }
-
+    // フォローされているか
+    //@param $user
+    //@return 
     public function isFollowed($user)
     {
         return $this->followers()->where('following_id', $user->id)->exists();
     }
 
+    //@param $user(ユーザー情報)
+    //@return $ifAccepted[0]->accepted == 1
+    //承認されているかを確認 isAccepted=true(承認されている) isAccepted=false(承認されていない)
     public function isAccepted($user){
         $ifAccepted = $this->follows()->where('following_id',$this->id)->where("followed_id", $user->id)->select('accepted')->get();
         return $ifAccepted[0]->accepted == 1;
