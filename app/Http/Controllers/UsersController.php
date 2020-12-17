@@ -43,21 +43,10 @@ class UsersController extends Controller
         $auth_user = Auth::user();
         if($auth_user->isFollowing($followed_user)){
             $auth_user->unfollow($followed_user->id);
-            return back();
         }
+        return back();
     }
 
-    //@param
-    //
-    public function unaccept(Request $request)
-    {
-        $accepted_user = User::find($request->user_id);
-        $auth_user = Auth::user();
-        if($auth_user->isFollowed($accepted_user)){
-            $auth_user->unfollow($accepted_user->id);
-            return back();
-        }
-    }
 
     //user詳細編集
     //@param $users

@@ -40,7 +40,7 @@ Route::get('users/{user_id}/unfollow', 'UsersController@unfollow')->name('unfoll
 
 //Follow承認関連
 Route::get('follower/{user_id}/accept', 'FollowerAcceptController@accept');
-Route::post('follower/{user_id}/unaccept', 'UsersController@unaccept');
+Route::get('follower/{user_id}/unaccept', 'FollowerAcceptController@unaccept');
 
 // user編集
 Route::get('users/{user_id}/edit', 'UsersController@edit')->middleware('auth');

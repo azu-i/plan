@@ -105,7 +105,7 @@ class EventController extends Controller
     {
         $auth = Auth::user();
         $authuser_id = $auth->id;
-
+        
         // followed_idだけ抜き出す
         $follow_ids = $follower->followingIds($authuser_id);
         //ログイン中のfollowing_idに紐づくfollowed_idをarrayで取り出す

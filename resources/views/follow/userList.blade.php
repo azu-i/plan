@@ -27,7 +27,7 @@
 
                             @if($user->isFollowing(Auth::user()))
                             @if(!$user->isAccepted(Auth::user()))
-                            <a  class="btn btn-danger h-25 ml-2" href="{{ action('UsersController@unfollow', ['id' => $user->id]) }}">承認しない</a>
+                            <a  class="btn btn-danger h-25 ml-2" href="{{ action('FollowerAcceptController@unaccept', ['user_id' => $user->id]) }}">承認しない</a>
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                             <a  class="btn btn-danger h-25 ml-1" href="{{ action('FollowerAcceptController@accept', ['id' => $user->id]) }}">承認する</a>
