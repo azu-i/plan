@@ -39,8 +39,8 @@ Route::get('users/{user_id}/follow', 'UsersController@follow')->name('follow');
 Route::get('users/{user_id}/unfollow', 'UsersController@unfollow')->name('unfollow');
 
 //Follow承認関連
-Route::get('follower_accept', 'FollowerAcceptController@index')->middleware('auth');
-Route::post('follower_accept/accept', 'FollowerAcceptController@accept')->middleware('auth');
+Route::get('follower/{user_id}/accept', 'FollowerAcceptController@accept');
+Route::post('follower/{user_id}/unaccept', 'UsersController@unaccept');
 
 // user編集
 Route::get('users/{user_id}/edit', 'UsersController@edit')->middleware('auth');

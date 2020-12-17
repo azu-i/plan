@@ -39,6 +39,7 @@
                                     <a  class="btn btn-danger h-70" href="{{ action('UsersController@unfollow', ['id' => $user->id]) }}">フォロー解除</a>
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
+
                                 @else
                                     <a  class="btn btn-secondary h-70" href="{{ action('UsersController@follow', ['id' => $user->id]) }}">フォローする</a>
                                     {{ csrf_field() }}

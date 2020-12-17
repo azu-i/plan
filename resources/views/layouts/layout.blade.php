@@ -52,9 +52,27 @@
                                 <a class="nav-item nav-link" href="{{ url('users/{user_id}/detail') }}">ユーザー情報</a>
                             </div>
                         </div>
+                        @guest
+                        <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                         {{-- ログインしていたらユーザー名とログアウトボタンを表示 --}}
+                         @else
+                             <li class="nav-item dropdown">
+                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" style="color:whie;">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
 
-                  </nav>
-                <main style="padding-top:70px">
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                        @endguest
+                    </nav>
+                 <main style="padding-top:90px">
                     @yield('content')
                 </main>
             </div>

@@ -55,6 +55,7 @@
                             <th>予定名</th>
                             <th>日程</th>
                             <th>時間</th>
+                            <th>詳細</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -64,6 +65,7 @@
                                 <th>{{ $plan->event_name }}</th>
                                 <th>{{ $plan->date }}</th>
                                 <th>{{ $plan->time }}</th>
+                                <th>{{ $plan->detail }}</th>
                                 <td>
                                     <div>
                                         <a  class="btn btn-secondary" href="{{ action('PlanController@delete', ['id' => $plan->id]) }}">削除</a>

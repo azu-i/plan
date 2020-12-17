@@ -60,16 +60,6 @@ class User extends Authenticatable
         return $this->where('id', '<>', $user_id)->paginate(10);
     }
 
-    public function accept($user_id)
-    {
-        return $this->follows()->attach($user_id);
-    }
-
-    public function unaccept($user_id)
-    {
-        return $this->follows()->detach($user_id);
-    }
-
     // フォローする
     public function follow($user_id)
     {
@@ -88,7 +78,7 @@ class User extends Authenticatable
     }
     // フォローされているか
     //@param $user
-    //@return 
+    //@return
     public function isFollowed($user)
     {
         return $this->followers()->where('following_id', $user->id)->exists();

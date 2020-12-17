@@ -14,7 +14,7 @@ class EventController extends Controller
 
     //カレンダーへの予定表示
     //@param App/Follower $follower
-    //@    $newArr(予定のタイトル・時間・予定の色)
+    //@return $newArr(予定のタイトル・時間・予定の色)
     public function setEvents(Follower $follower)
     {
         $this->carbon = new Carbon;
@@ -32,7 +32,7 @@ class EventController extends Controller
         $end = $this->carbon->copy()->endOfMonth();
 
         //カレンダーの期間内のイベントを取得
-        
+
         if($followed_ids != null){
             $events = Plan::whereIn('user_id', $followed_ids)->whereBetween('date', [$start, $end])->select('user_id','id', 'event_name', 'date','time')->get();
         }else{
@@ -63,6 +63,11 @@ class EventController extends Controller
         }
         echo json_encode($newArr);
     }
+
+    public function setBirthday(){
+
+    }
+
 
     // "2019-12-12T00:00:00+09:00"のようなデータを今回のDBに合うように"2019-12-12"
     public function formatDate($date)
@@ -95,6 +100,7 @@ class EventController extends Controller
     }
 
 
+    //カレンダーview表示や
     public function calendar(Follower $follower)
     {
         $auth = Auth::user();
