@@ -19,6 +19,6 @@ class Follower extends Model
     {
         $authuser = Auth::user();
         $user_id = $authuser->id;
-        return $this->where('following_id', $user_id)->get();
+        return $this->where('following_id', $user_id)->where('accepted',1)->get();
     }
 }

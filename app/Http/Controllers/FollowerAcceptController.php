@@ -13,7 +13,6 @@ class FollowerAcceptController extends Controller
     //@return $result(follower_tableへのacceptedカラム保存)
     public function accept(Request $request) {
         $followAccept= Follower::where([["following_id",$request->user_id], ["followed_id", Auth::id()]])->first();
-        // dd($followAccept);
         $followAccept->accepted = 1;
         $result = $followAccept->save();
         return redirect('/users');
