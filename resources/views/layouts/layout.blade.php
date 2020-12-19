@@ -32,13 +32,31 @@
             <script src="{{ asset('js/ajax-setup.js') }}" defer></script>
         </head>
         <body class="p">
-
             <div id="app">
-                  <nav class="navbar fixed-top navbar-dark bg-dark navbar-expand-lg">
-                        <div class="navbar-header">
-                            <a class="navbar-brand" href="{{ url('/calendar') }}">アプリ名</a>
+                <nav class="navbar fixed-top navbar-dark bg-dark navbar-expand-lg">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="{{ url('/calendar') }}">アプリ名</a>
+                    </div>
+                    {{-- ログインしていない場合 ログインボタン --}}
+                    @guest
+                        <a class="nav-link" href="{{ route('login') }}" style="color:white;">{{ __('Login') }}</a>
+                    {{-- ログインしていたらユーザー名とログアウトボタンを表示 --}}
+                    @else
+                        <div class="dropdown">
+                            <a id="navbarDropdown" class="btn btn-outline-dark dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white;">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                            </div>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         </div>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navmenu1" aria-controls="navmenu1" aria-expanded="false"aria-label="Toggle navigation">
+                    @endguest
+                        <button class="navbar-toggler" type="button " data-toggle="collapse" data-target="#navmenu1" aria-controls="navmenu1" aria-expanded="false"aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navmenu1">
@@ -52,29 +70,10 @@
                                 <a class="nav-item nav-link" href="{{ url('users/{user_id}/detail') }}">ユーザー情報</a>
                             </div>
                         </div>
-                        @guest
-                        <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                         {{-- ログインしていたらユーザー名とログアウトボタンを表示 --}}
-                         @else
-                             <li class="nav-item dropdown">
-                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" style="color:whie;">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                        @endguest
-                    </nav>
-                 <main style="padding-top:90px">
+                </nav>
+            </div>
+                <main style="padding-top:70px">
                     @yield('content')
                 </main>
-            </div>
         </body>
 </html>

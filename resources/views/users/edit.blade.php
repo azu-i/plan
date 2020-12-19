@@ -25,7 +25,7 @@
                         <div class="form-group row">
                             <label for="birthday" class="col-md-4 col-form-label text-md-right">誕生日</label>
                             <div class="col-md-6">
-                                <input type="date" value="date" class="form-control" name="birthday">
+                                <input type="date" value="<?php echo date('m-d'); ?>" class="form-control" name="birthday">
                             </div>
                         </div>
                         <div class="form-group row mb-0">

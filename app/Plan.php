@@ -14,12 +14,14 @@ class Plan extends Model
         'detail' => "max:30",
     );
 
-    // Planに大してUserは１つ
+    // planに大してUserは１つ
     public function user(){
         return $this->belongsTo('App\User');
     }
 
     // 自身とフォローしているユーザIDを結合する
+    //@param $user_id
+    //@param $follow_ids
     public function eventGet($user_id, $follow_ids)
     {
         $follow_ids[] = $user_id;

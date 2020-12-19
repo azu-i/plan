@@ -14,7 +14,7 @@ class Follower extends Model
     public $timestamps = false;
     public $incrementing = false;
 
-    // フォローしているテーブルの取得
+    //@return array(followed_id)フォローしているテーブルの取得(承認したユーザーのみ)
     public function followingIds()
     {
         $authuser = Auth::user();

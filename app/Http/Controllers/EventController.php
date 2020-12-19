@@ -65,7 +65,7 @@ class EventController extends Controller
     }
 
     public function setBirthday(){
-        
+
     }
 
 
@@ -100,7 +100,9 @@ class EventController extends Controller
     }
 
 
-    //カレンダーview表示や
+    //カレンダーview表示への色表示
+    //@param $follower
+    //@return $lists ユーザーに合わせた色
     public function calendar(Follower $follower)
     {
         $auth = Auth::user();

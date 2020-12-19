@@ -41,7 +41,7 @@
                                         {{ method_field('DELETE') }}
 
                                 @else
-                                    <a  class="btn btn-secondary h-70" href="{{ action('UsersController@follow', ['id' => $user->id]) }}">フォローする</a>
+                                    <a  class="btn btn-secondary h-70" href="{{ action('UsersController@follow', ['id' => $user->id]) }}">フォロー申請</a>
                                     {{ csrf_field() }}
                                 @endif
                             </div>

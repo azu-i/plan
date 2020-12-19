@@ -15,13 +15,13 @@
                     </ul>
                 @endif
                 <div class="form-group row">
-                    <label class="col-md-7">予定名  ※</label>
+                    <label class="col-md-7">予定名  ※入力必須</label>
                     <div  class="col-md-10">
                         <input type="text" class="form-control" name="event_name" value="{{ old('event_name') }}">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-7">日付  ※</label>
+                    <label class="col-md-7">日付 ※入力必須</label>
                     <div class="col-md-10">
                         <input type="date" value="<?php echo date('Y-m-d'); ?>"class="form-control" name="date" value="{{ old('date') }}">
                     </div>
@@ -35,11 +35,8 @@
                 <div class="form-group row">
                     <label class="col-md-7">詳細</label>
                     <div class="col-md-10">
-                       <textarea class="form-control" name="detail" rows="10"></textarea>
+                       <textarea class="form-control" name="detail" rows="5"></textarea>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label>※は入力必須</label>
                 </div>
                  {{ csrf_field() }}
                 <input type="submit" class="form-group row btn btn-secondary" value="登録">

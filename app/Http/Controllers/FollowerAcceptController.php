@@ -18,6 +18,8 @@ class FollowerAcceptController extends Controller
         return redirect('/users');
     }
 
+    //@param Request
+    //ユーザーがフォロー申請していれば承認拒否
     public function unaccept(Request $request)
     {
         $followed_user = User::find($request->user_id);
