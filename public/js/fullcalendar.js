@@ -12,14 +12,22 @@ document.addEventListener('DOMContentLoaded', function() {
           },
 
         ],
+        //24時間表示
+        eventTimeFormat: {
+            hour: "2-digit",
+            minute: "2-digit",
+            meridiem: false,
+            hour12: false
+        },
+
         defaultView: 'dayGridMonth',
         height: 700 ,
         editable: true,
         displayEventTime: true,
-        timeFormat: 'H(:mm)',
         //1→月曜日始まり、0→日曜日始まり
         firstDay : 0,
-        
+
+
         headerToolbar: {
             left: "dayGridMonth,listMonth",
             center: "title",

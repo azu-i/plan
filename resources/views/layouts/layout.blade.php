@@ -24,7 +24,7 @@
              <script src="{{ asset('js/fullcalendar/main.js') }}"></script>
             <!--css-->
             <link href="{{ asset('css/fullcalendar/main.css') }}" type="text/css" rel='stylesheet' />
-            <link href="{{ asset('css/calendar.css') }}" rel='stylesheet'>
+            <link href="{{ asset('css/calendar.css') }}" type="text/css" rel='stylesheet'>
 
 
             <script src="{{ asset('js/fullcalendar.js') }}" defer></script>
