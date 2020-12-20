@@ -20,6 +20,10 @@ document.addEventListener('DOMContentLoaded', function() {
             hour12: false
         },
 
+        eventClick: function(info) {
+            alert('予定名: ' + info.event.title);
+        },
+
         defaultView: 'dayGridMonth',
         height: 700 ,
         editable: true,

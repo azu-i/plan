@@ -26,7 +26,6 @@
             <link href="{{ asset('css/fullcalendar/main.css') }}" type="text/css" rel='stylesheet' />
             <link href="{{ asset('css/calendar.css') }}" type="text/css" rel='stylesheet'>
 
-
             <script src="{{ asset('js/fullcalendar.js') }}" defer></script>
             <script src="{{ asset('js/event-control.js') }}" defer></script>
             <script src="{{ asset('js/ajax-setup.js') }}" defer></script>
@@ -35,31 +34,13 @@
             <div id="app">
                 <nav class="navbar fixed-top navbar-dark bg-dark navbar-expand-lg">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="{{ url('/calendar') }}">アプリ名</a>
+                        <a class="navbar-brand" href="{{ url('/calendar') }}"style="font-family: 'Pacifico', cursive;">My schedule</a>
                     </div>
-                    {{-- ログインしていない場合 ログインボタン --}}
-                    @guest
-                        <a class="nav-link" href="{{ route('login') }}" style="color:white;">{{ __('Login') }}</a>
-                    {{-- ログインしていたらユーザー名とログアウトボタンを表示 --}}
-                    @else
-                        <div class="dropdown">
-                            <a id="navbarDropdown" class="btn btn-outline-dark dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white;">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-                            </div>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
-                    @endguest
-                        <button class="navbar-toggler" type="button " data-toggle="collapse" data-target="#navmenu1" aria-controls="navmenu1" aria-expanded="false"aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navmenu1">
+                    <button class="navbar-toggler" type="button " data-toggle="collapse" data-target="#navmenu1" aria-controls="navmenu1" aria-expanded="false"aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navmenu1">
+                            {{-- ログインしていない場合 ログインボタン --}}
                             <div class="navbar-nav">
                                 <a class="nav-item nav-link" href="{{ url('/plan') }}">予定登録</a>
                             </div>
@@ -69,6 +50,26 @@
                             <div class="navbar-nav">
                                 <a class="nav-item nav-link" href="{{ url('users/{user_id}/detail') }}">ユーザー情報</a>
                             </div>
+                            @guest
+                            <div class="navbar-nav">
+                                <a class="nav-link nav-item" href="{{ route('login') }}" style="color:white;">{{ __('Login') }}</a>
+                            </div>
+                            {{-- ログインしていたらユーザー名とログアウトボタンを表示 --}}
+                            @else
+                                <div class="dropdown navbar-nav">
+                                    <a id="navbarDropdown nav-item" class="btn btn-outline-dark dropdown-toggle " href="#" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white;">
+                                        {{ Auth::user()->name }} <span class="caret"></span>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+                                    </div>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            @endguest
                         </div>
                 </nav>
             </div>

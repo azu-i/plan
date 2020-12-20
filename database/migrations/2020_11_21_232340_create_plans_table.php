@@ -21,7 +21,6 @@ class CreatePlansTable extends Migration
             $table->date('date');
             $table->time('time')->nullable();;
             $table->string('detail')->nullable();
-            $table->string('image_path')->nullable();
             $table->timestamps();
         });
     }
