@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
             googleCalendarApiKey: 'AIzaSyC_qr8J9tGVhIze_ZeGiHFebfwjRRGc9Q8',
             googleCalendarId: 'ja.japanese#holiday@group.v.calendar.google.com',
             className: 'holiday',
-            color:'white',
-            textColor: 'red',
+            color:'red',
+            textColor: 'white',
           },
 
         ],
@@ -20,17 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
             hour12: false
         },
 
-        eventClick: function(info) {
-            alert('予定名: ' + info.event.title);
-        },
-
         defaultView: 'dayGridMonth',
         height: 700 ,
         editable: true,
-        displayEventTime: true,
         //1→月曜日始まり、0→日曜日始まり
         firstDay : 0,
-
 
         headerToolbar: {
             left: "dayGridMonth,listMonth",
@@ -38,12 +32,11 @@ document.addEventListener('DOMContentLoaded', function() {
             right: "today prev,next"
           },
 
-        //イベントの期間変更
-        eventDurationEditable : false,
         // スマホでタップしたとき即反応
         selectLongPressDelay:0,
 
         events: "/setEvents",
+
     });
     calendar.render();
 

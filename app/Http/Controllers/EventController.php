@@ -15,6 +15,7 @@ class EventController extends Controller
     //カレンダーへの予定表示
     //@param App/Follower $follower
     //@return $newArr(予定のタイトル・時間・予定の色)
+    //               (誕生日の表示)
     public function setEvents(Follower $follower)
     {
         $this->carbon = new Carbon;
@@ -61,13 +62,23 @@ class EventController extends Controller
             }
             $newArr[] = $newItem;
         }
+
+        if($followed_ids != null){
+            $birthdays = User::whereIn('id', $followed_ids)->select('birthday','name')->get();
+        }else{
+            $birthdays = User::where('id', $user->id)->select('birthday','name')->get();
+        }
+
+        foreach($birthdays as $birthday){
+            $newItem["title"] = $birthday["name"] . "の誕生日";
+            $newItem["start"] = $birthday["birthday"];
+            // 色はワインレッド
+            $newItem["color"] = "#BC2768";
+            $newArr[] = $newItem;
+        }
+
         echo json_encode($newArr);
     }
-
-    public function setBirthday(){
-
-    }
-
 
     // "2019-12-12T00:00:00+09:00"のようなデータを今回のDBに合うように"2019-12-12"
     public function formatDate($date)

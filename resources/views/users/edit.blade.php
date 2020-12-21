@@ -12,7 +12,7 @@
                         @csrf
 
                         <div class="form-group row align-items-center">
-                            <label for="profile_image" class="col-md-4 col-form-label text-md-right">プロフィール画像</label>
+                            <label for="profile_image" class="col-md-4 col-form-label text-md-right">ユーザー画像</label>
                             <div class="col-md-6 d-flex align-items-center">
                                 <input type="file" name="profile_image">
                                 @error('profile_image')
