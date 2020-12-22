@@ -27,9 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         firstDay : 0,
 
         headerToolbar: {
-            left: "dayGridMonth,listMonth",
-            center: "title",
-            right: "today prev,next"
+            right: "prev,next"
           },
 
         // スマホでタップしたとき即反応

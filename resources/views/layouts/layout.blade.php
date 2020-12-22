@@ -33,9 +33,10 @@
         <body class="p">
             <div id="app">
                 <nav class="navbar fixed-top navbar-dark bg-dark navbar-expand-lg">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="{{ url('/calendar') }}"style="font-family: 'Pacifico', cursive;">My schedule</a>
-                    </div>
+                    <a class="navbar-header" href="{{ url('/calendar') }}">
+                        {{-- <a class="navbar-brand" href="{{ url('/calendar') }}"style="font-family: 'Pacifico', cursive;">My schedule</a> --}}
+                        <img class="logo" src={{ asset("image/logo.png") }} height="50" width="140">
+                    </a>
                     <button class="navbar-toggler" type="button " data-toggle="collapse" data-target="#navmenu1" aria-controls="navmenu1" aria-expanded="false"aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -73,7 +74,7 @@
                         </div>
                 </nav>
             </div>
-                <main style="padding-top:70px">
+                <main style="padding-top:80px">
                     @yield('content')
                 </main>
         </body>
