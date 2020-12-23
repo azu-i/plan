@@ -34,7 +34,6 @@
             <div id="app">
                 <nav class="navbar fixed-top navbar-dark bg-dark navbar-expand-lg">
                     <a class="navbar-header" href="{{ url('/calendar') }}">
-                        {{-- <a class="navbar-brand" href="{{ url('/calendar') }}"style="font-family: 'Pacifico', cursive;">My schedule</a> --}}
                         <img class="logo" src={{ asset("image/logo.png") }} height="50" width="140">
                     </a>
                     <button class="navbar-toggler" type="button " data-toggle="collapse" data-target="#navmenu1" aria-controls="navmenu1" aria-expanded="false"aria-label="Toggle navigation">
@@ -52,9 +51,6 @@
                                 <a class="nav-item nav-link" href="{{ url('users/{user_id}/detail') }}">ユーザー情報</a>
                             </div>
                             @guest
-                            <div class="navbar-nav">
-                                <a class="nav-link nav-item" href="{{ route('login') }}" style="color:white;">{{ __('Login') }}</a>
-                            </div>
                             {{-- ログインしていたらユーザー名とログアウトボタンを表示 --}}
                             @else
                                 <div class="dropdown navbar-nav">

@@ -42,7 +42,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <div class="col-md-6 offset-md-4">
+                                <div class="col-md-7 offset-md-4">
                                     <div class="checkbox">
                                         <label>
                                             <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('messages.Remember Me') }}
@@ -56,16 +56,16 @@
                                     <button type="submit" class="btn btn-secondary">
                                         {{ __('messages.Login') }}
                                     </button>
-                                     @if (Route::has('password.request'))
-                                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                {{ __('messages.Forgot Your Password?') }}
-                                            </a>
-                                      @endif
                                 </div>
                                 <div class="col-md-8 offset-md-4 mt-3">
                                     <a class="btn btn-secondary" href="{{ route('register') }}">
-                                                {{ __('messages.Register') }}
+                                        {{ __('messages.Register') }}
                                     </a>
+                                    @if (Route::has('password.request'))
+                                           <a class="btn btn-link" href="{{ route('password.request') }}">
+                                               {{ __('messages.Forgot Your Password?') }}
+                                           </a>
+                                     @endif
                                 </div>
                             </div>
 

@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
+        // plugins: [rrulePlugin],
+
         eventSources: [
             {
             googleCalendarApiKey: 'AIzaSyC_qr8J9tGVhIze_ZeGiHFebfwjRRGc9Q8',

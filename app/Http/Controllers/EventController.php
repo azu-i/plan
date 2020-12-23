@@ -63,6 +63,7 @@ class EventController extends Controller
             $newArr[] = $newItem;
         }
 
+        //誕生日の設定
         if($followed_ids != null){
             $birthdays = User::whereIn('id', $followed_ids)->select('birthday','name')->get();
         }else{
@@ -72,6 +73,7 @@ class EventController extends Controller
         foreach($birthdays as $birthday){
             $newItem["title"] = $birthday["name"] . "の誕生日";
             $newItem["start"] = $birthday["birthday"];
+            $newItem["freq"] = "RRule.YEARLY";
             // 色はワインレッド
             $newItem["color"] = "#BC2768";
             $newArr[] = $newItem;
