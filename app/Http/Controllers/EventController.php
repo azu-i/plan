@@ -73,7 +73,6 @@ class EventController extends Controller
         foreach($birthdays as $birthday){
             $newItem["title"] = $birthday["name"] . "の誕生日";
             $newItem["start"] = $birthday["birthday"];
-            $newItem["freq"] = "RRule.YEARLY";
             // 色はワインレッド
             $newItem["color"] = "#BC2768";
             $newArr[] = $newItem;

@@ -8,5 +8,6 @@
     </div>
     <div id="calendar" class="mt-10"></div>
     {{ csrf_field() }}
+    
 @endsection
 
