@@ -1,9 +1,8 @@
 
 
+
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
-
-
     var calendar = new FullCalendar.Calendar(calendarEl, {
         eventSources: [
             {
@@ -40,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     });
+
     calendar.render();
 
 });

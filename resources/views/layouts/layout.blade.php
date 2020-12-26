@@ -29,6 +29,8 @@
             <script src="{{ asset('js/fullcalendar.js') }}" defer></script>
             <script src="{{ asset('js/event-control.js') }}" defer></script>
             <script src="{{ asset('js/ajax-setup.js') }}" defer></script>
+            <script src="{{ asset('js/rrule/rrule.min.js') }}" defer></script>
+            <script src='https://cdn.jsdelivr.net/npm/rrule@2.6.4/dist/es5/rrule.min.js'></script>
         </head>
         <body class="p">
             <div id="app">

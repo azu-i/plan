@@ -26,6 +26,7 @@
     "dependencies": {
         "@fullcalendar/core": "^5.5.0",
         "@fullcalendar/daygrid": "^5.5.0",
-        "@fullcalendar/rrule": "^5.5.0"
+        "@fullcalendar/rrule": "^5.5.0",
+        "rrule": "^2.6.6"
     }
 }

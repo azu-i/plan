@@ -70,21 +70,18 @@ class EventController extends Controller
             $birthdays = User::where('id', $user->id)->select('birthday','name')->get();
         }
 
+
         foreach($birthdays as $birthday){
-            $newItem["title"] = $birthday["name"] . "の誕生日";
-            $newItem["start"] = $birthday["birthday"];
-            // 色はワインレッド
-            $newItem["color"] = "#BC2768";
-            $newArr[] = $newItem;
+            if($birthday["birthday"]!=null){
+                $newItem["title"] = $birthday["name"] . "の誕生日";
+                [$year, $month, $day] = explode("-", $birthday["birthday"]);
+                $newItem["start"] = date("Y") . "-" . $month . "-" . "$day";
+                // 色はワインレッド
+                $newItem["color"] = "#BC2768";
+                $newArr[] = $newItem;
+            }
         }
-
         echo json_encode($newArr);
-    }
-
-    // "2019-12-12T00:00:00+09:00"のようなデータを今回のDBに合うように"2019-12-12"
-    public function formatDate($date)
-    {
-        return str_replace('T00:00:00+09:00', '', $date);
     }
 
 
