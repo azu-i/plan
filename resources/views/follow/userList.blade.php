@@ -10,7 +10,8 @@
                             @if($user->profile_image == null)
                             <img src={{ asset("image/profileimage.jpeg") }} class="rounded-circle" width="50" height="50">
                             @else
-                            <img src={{ asset("storage/image/".$user->profile_image)}}   class="rounded-circle" width="50" height="50">
+                            {{-- <img src={{ asset("storage/image/".$user->profile_image)}}   class="rounded-circle" width="50" height="50"> --}}
+                            <img src="{{ $user->profile_image }}"  class="rounded-circle" width="50" height="50">
                             @endif
                             <div class="ml-2 d-flex flex-column pl-2">
                                 <p class="mb-0">{{ $user->name }}</p>

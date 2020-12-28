@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Follower;
+use Storage;
 use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
@@ -64,11 +65,12 @@ class UsersController extends Controller
     {
         $editUser = User::find(Auth::id());
         $plusInfo = $request -> all();
+        
         if ($request->remove == 'true') {
             $plusInfo['profile_image'] = null;
         } elseif ($request->file('profile_image')) {
-            $path = $request->file('profile_image')->store('public/image');
-            $plusInfo['profile_image'] = basename($path);
+            $path = Storage::disk('s3')->putFile('/',$plusInfo['profile_image'],'public');
+            $plusInfo['profile_image'] = Storage::disk('s3')->url($path);
         } else {
             $plusInfo['profile_image'] = $editUser->profile_image;
         }
