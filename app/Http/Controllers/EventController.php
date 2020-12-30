@@ -135,7 +135,6 @@ class EventController extends Controller
                 $list["color"] = $event_color[$result];
             }
         }
-
         return view('calendar',['lists' => $lists]);
     }
 }
