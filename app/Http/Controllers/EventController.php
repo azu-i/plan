@@ -122,7 +122,7 @@ class EventController extends Controller
         //ログイン中のfollowing_idに紐づくfollowed_idをarrayで取り出す
         $followed_ids = $follow_ids->pluck('followed_id')->toArray();
         array_push($followed_ids ,$authuser_id);
-
+        $lists = array();
 
         //カレンダーの期間内のイベントを取得
         if($followed_ids !== null){
@@ -140,6 +140,8 @@ class EventController extends Controller
                 $list["color"] = $event_color[$result];
             }
         }
-        return view('calendar',['lists' => $lists]);
+
+        // return view('calendar',['lists' => $lists]);
+        return view('calendar',compact('lists'));
     }
 }
