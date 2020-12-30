@@ -28,14 +28,9 @@ class EventController extends Controller
         $followed_ids = $follow_ids->pluck('followed_id')->toArray();
         array_push($followed_ids ,$user_id);
 
-        // 期間の始まりと終わり
-        $start = $this->carbon->copy()->startOfMonth();
-        $end = $this->carbon->copy()->endOfMonth();
-
-        //カレンダーの期間内のイベントを取得
-
+        //イベントを取得
         if($followed_ids != null){
-            $events = Plan::whereIn('user_id', $followed_ids)->whereBetween('date', [$start, $end])->select('user_id','id', 'event_name', 'date','time')->get();
+            $events = Plan::whereIn('user_id', $followed_ids)->select('user_id','id', 'event_name', 'date','time')->get();
         }else{
             $events = Plan::where('user_id', $user->id)->whereBetween('date', [$start, $end])->select('user_id','id', 'event_name', 'date','time')->get();
         }
@@ -141,7 +136,6 @@ class EventController extends Controller
             }
         }
 
-        // return view('calendar',['lists' => $lists]);
-        return view('calendar',compact('lists'));
+        return view('calendar',['lists' => $lists]);
     }
 }
