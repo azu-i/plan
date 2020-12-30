@@ -11,15 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
+Route::get('/', 'HomeController@index')->name('home')->middleware('auth');
+// Route::get('/', 'EventController@calendar')->name('home')->middleware('auth');
 
-// Route::get('/', 'HomeController@index')->name('home')->middleware('auth');
-Route::get('/', 'EventController@calendar')->name('home')->middleware('auth');
 
 // カレンダー関連
 Route::get('/setEvents', 'EventController@setEvents');
