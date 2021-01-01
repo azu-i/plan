@@ -14,15 +14,13 @@
 
 Auth::routes();
 
-// Route::get('/', 'HomeController@index')->name('home')->middleware('auth');
+
 Route::get('/', 'EventController@calendar')->name('home')->middleware('auth');
 
 
 // カレンダー関連
 Route::get('/setEvents', 'EventController@setEvents');
 Route::get('/setBirthday', 'EventController@setBirthday');
-Route::post('/ajax/addEvent', 'EventController@addEvent');
-Route::post('/ajax/editEventDate', 'EventController@editEventDate');
 
 //Planについて
 Route::get('/plan','PlanController@getPlan')->middleware('auth');

@@ -79,31 +79,6 @@ class EventController extends Controller
         echo json_encode($newArr);
     }
 
-
-    public function addEvent(Request $request)
-    {
-        $data = $request->all();
-        $event = new Plan();
-        $event->id = $this->generateId();
-        $event->date = $data['date'];
-        $event->event_name = $data['event_name'];
-        $event->time = $data['time'];
-        $event->save();
-
-        return response()->json(['id' => $event->id ]);
-    }
-
-    // ajaxで受け取ったデータをデータベースに追加し、今度はidを返す。
-    public function editEventDate(Request $request)
-    {
-        $data = $request->all();
-        $event = Plan::find($data['id']);
-        $event->date = $data['newDate'];
-        $event->save();
-        return null;
-    }
-
-
     //カレンダーview表示への色表示
     //@param $follower
     //@return $lists ユーザーに合わせた色
