@@ -147,6 +147,7 @@ return [
 
     'attributes' => [
         'event_name' => '予定名',
+        'date' => '日付',
         'detail' => '詳細'
     ],
 
