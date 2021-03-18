@@ -28,11 +28,11 @@ class EventController extends Controller
         $followed_ids = $follow_ids->pluck('followed_id')->toArray();
         array_push($followed_ids ,$user_id);
 
-        //イベントを取得
+        //予定を取得
         if($followed_ids != null){
             $events = Plan::whereIn('user_id', $followed_ids)->select('user_id','id', 'event_name', 'date','time')->get();
         }else{
-            $events = Plan::where('user_id', $user->id)->whereBetween('date', [$start, $end])->select('user_id','id', 'event_name', 'date','time')->get();
+            $events = Plan::where('user_id', $user->id)->select('user_id','id', 'event_name', 'date','time')->get();
         }
 
         //新たな配列を用意し、 EventsObjectが対応している配列にキーの名前を変更する
@@ -92,7 +92,7 @@ class EventController extends Controller
         //ログイン中のfollowing_idに紐づくfollowed_idをarrayで取り出す
         $followed_ids = $follow_ids->pluck('followed_id')->toArray();
         array_push($followed_ids ,$authuser_id);
-        $lists = array();
+        $lists = [];
 
         //カレンダーの期間内のイベントを取得
         if($followed_ids !== null){
